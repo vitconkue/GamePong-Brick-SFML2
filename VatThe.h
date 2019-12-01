@@ -36,4 +36,3 @@ public:
 		delete this->texture;
 	}
 };
-

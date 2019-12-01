@@ -15,13 +15,17 @@ void Menu::KhoiTao(RenderWindow* window)
 	this->tengame->setOrigin(this->tengame->getGlobalBounds().width / 2, this->tengame->getGlobalBounds().height / 2);
 	this->tengame->setPosition(window->getSize().x / 2, window->getSize().y / 8);
 	//Nút bắt đầu
-	this->choi = new Text("Bat dau", *this->font, 128U);
+	this->choi = new Text("Bat dau Pong", *this->font, 128U);
 	this->choi->setOrigin(this->choi->getGlobalBounds().width / 2, this->choi->getGlobalBounds().height / 2);
 	this->choi->setPosition(window->getSize().x / 2, window->getSize().y / 3);
+	// Nút bắt đầu chế độ brick
+	this->choi2 = new Text("Bat dau Brick", *font, 128U);
+	this->choi2->setOrigin(choi2->getGlobalBounds().width / 2, choi2->getGlobalBounds().height / 2); 
+	this->choi2->setPosition(window->getSize().x / 2, window->getSize().y / 3 + 80); 
 	//Nút thoát
 	this->thoat = new Text("Thoat", *this->font, 128U);
 	this->thoat->setOrigin(this->thoat->getGlobalBounds().width / 2, this->thoat->getGlobalBounds().height / 2);
-	this->thoat->setPosition(window->getSize().x / 2, window->getSize().y / 3 + this->choi->getGlobalBounds().height + 50);
+	this->thoat->setPosition(window->getSize().x / 2, window->getSize().y / 3 + this->choi->getGlobalBounds().height + 100);
 
 	this->madeby = new Text("Made by 18120164 - 18120174", *this->font, 30U);
 	this->madeby->setOrigin(this->madeby->getGlobalBounds().width / 2, this->madeby->getGlobalBounds().height / 2);
@@ -41,13 +45,13 @@ void Menu::CapNhat(RenderWindow* window)
 		this->luachon += 1;
 	}
 	//Nếu lựa chọn >1 hoặc <1 trả về 0
-	if (this->luachon > 1)
+	if (this->luachon > 2)
 	{
 		this->luachon = 0;
 	}
 	if (this->luachon < 0)
 	{
-		this->luachon = 1;
+		this->luachon = 2;
 	}
 	//Bấm Enter để lựa chọn
 	if (Keyboard::isKeyPressed(Keyboard::Key::Enter))
@@ -57,7 +61,10 @@ void Menu::CapNhat(RenderWindow* window)
 		case 0:
 			coreState.SetTrangThai(new mainGame());
 			break;
-		case 1:
+		case 1: 
+			coreState.SetTrangThai(new mainGame_Brick()); 
+			break; 
+		case 2:
 			quitGame = true;
 			break;
 		}
@@ -75,12 +82,16 @@ void Menu::Xuat(sf::RenderWindow* window)
 	case 0:
 		this->choi->setFillColor(Color::Green);
 		break;
-	case 1:
+	case 1: 
+		this->choi2->setFillColor(Color::Green); 
+		break; 
+	case 2:
 		this->thoat->setFillColor(Color::Green);
 		break;
 	}
 	window->draw(*this->tengame);
 	window->draw(*this->choi);
+	window->draw(*this->choi2);
 	window->draw(*this->thoat);
 	window->draw(*this->madeby);
 }
@@ -89,6 +100,7 @@ void Menu::Destroy(RenderWindow* window)
 	delete this->font;
 	delete this->tengame;
 	delete this->choi;
+	delete this->choi2; 
 	delete this->thoat;
 	delete this->madeby;
 }

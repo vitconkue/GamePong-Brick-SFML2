@@ -9,6 +9,15 @@ void DiemSo::TangDan()
 {
 	this->GiaTri += 1;
 }
+void DiemSo::TangThem(int x)
+{
+	GiaTri += x; 
+}
+void DiemSo::GiamXuong(int x)
+{
+	GiaTri -= x; 
+	
+}
 //Hàm cập nhật in điểm theo giá trị tăng dần
 void DiemSo::CapNhat()
 {
