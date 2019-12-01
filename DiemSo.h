@@ -6,6 +6,8 @@ class DiemSo : public Text
 public:
 	DiemSo(Font& font, unsigned int size);
 	void TangDan();
+	void TangThem(int x); 
+	void GiamXuong(int x); 
 	void CapNhat();
 	int GetDiem();
 private:

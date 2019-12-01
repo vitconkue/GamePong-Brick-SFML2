@@ -1,4 +1,5 @@
 ﻿#include "ThanhNguoiChoi.h"
+
 //Hàm khởi tạo Thanh theo số thứ tự 0, 1
 ThanhNguoiChoi::ThanhNguoiChoi(int so)
 {
