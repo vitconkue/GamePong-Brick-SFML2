@@ -70,7 +70,7 @@ void mainGame_Brick::Xuat(RenderWindow* window)
 	{
 		if (ball->getLive() == 0) // truong hop thua
 		{
-			window->draw(*win);
+			window->draw(*lose);
 			if (Keyboard::isKeyPressed(Keyboard::Key::Enter))
 			{
 				coreState.SetTrangThai(new mainGame_Brick());
@@ -82,7 +82,7 @@ void mainGame_Brick::Xuat(RenderWindow* window)
 		}
 		else // truong hop thang
 		{
-			window->draw(*lose);
+			window->draw(*win);
 			if (Keyboard::isKeyPressed(Keyboard::Key::Enter))
 			{
 				coreState.SetTrangThai(new mainGame_Brick());
