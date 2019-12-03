@@ -29,10 +29,8 @@ int main()
 				if (event.type == Event::Closed)
 					window.close();
 			}
-
-			window.clear(Color::Black);
-
-			coreState.CapNhat();
+            window.clear(Color::Black);
+            coreState.CapNhat();
 			coreState.Xuat();
 
 			window.display();
