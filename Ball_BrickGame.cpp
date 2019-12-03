@@ -39,7 +39,6 @@ void Ball_BrickGame::CapNhat(sf::RenderWindow* window, DiemSo*& point)
 	if (this->getPosition().y + this->getGlobalBounds().height >= window->getSize().y)
 	{
 		lives--;
-		std::cout << lives << std::endl; 
 		reset(window); 
 	}
 	// tuong trai phai

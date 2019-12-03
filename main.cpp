@@ -9,11 +9,7 @@ bool quitGame = false;
 
 int main()
 {
-	cout << "----------- PING PONG GAME --------------\n";
-	cout << "-Huong dan cach choi:\n-Khi hien cua so game, dieu khien mui ten len xuong va bam Enter de chon!\n-2 nguoi choi se dieu khien thanh truot\nlen xuong bang cac phim W,S va mui ten len, xuong\nNguoi choi nao dat 5 diem truoc se chien thang!\n-Bam P de tam dung tro choi.\n";
-	cout << "1. Bat dau choi - 0. Thoat\nNhap lua chon: ";
-	int luachon;
-	luachon = 1;
+	int luachon = 1;
 	switch (luachon)
 	{
 	case 1:
