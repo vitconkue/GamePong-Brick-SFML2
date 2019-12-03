@@ -13,7 +13,7 @@ private:
 	sf::Sound* sound; 
 public: 
 	Ball_BrickGame(DiemSo* d, Thanh* p); 
-	void CapNhat(sf::RenderWindow* window); 
+	void CapNhat(sf::RenderWindow* window, DiemSo*& point); 
 	void reset(sf::RenderWindow* window); 
 	int getLive() { return lives; }
 	~Ball_BrickGame(); 

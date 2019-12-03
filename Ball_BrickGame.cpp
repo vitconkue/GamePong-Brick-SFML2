@@ -14,7 +14,7 @@ Ball_BrickGame::Ball_BrickGame(DiemSo* d, Thanh* p)
 
 }
 
-void Ball_BrickGame::CapNhat(sf::RenderWindow* window)
+void Ball_BrickGame::CapNhat(sf::RenderWindow* window, DiemSo*& point)
 {
 	// kiem tra va cham voi thanh
 	if (getPosition().x >= player->getPosition().x - player->getGlobalBounds().width -20 &&
@@ -26,6 +26,7 @@ void Ball_BrickGame::CapNhat(sf::RenderWindow* window)
 			VanToc.y * 1.1;
 			VanToc.x *= 1.1;
 			sound->play();
+			point->TangThem(1);
 		}
     }
 	// cham tuong tren
@@ -45,6 +46,7 @@ void Ball_BrickGame::CapNhat(sf::RenderWindow* window)
 	if (getPosition().x < 0 || getPosition().x + getGlobalBounds().width >= window->getSize().x)
 	{
 		VanToc.x *= -1; 
+		sound->play();
 	}
 
 	VatThe::CapNhat(); 

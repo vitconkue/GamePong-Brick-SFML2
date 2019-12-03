@@ -10,6 +10,7 @@ public:
 	void GiamXuong(int x); 
 	void CapNhat();
 	int GetDiem();
+	void setDiem(int num) { GiaTri = num; }
 private:
 	int GiaTri;
 };
