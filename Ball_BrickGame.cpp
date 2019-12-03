@@ -17,16 +17,22 @@ Ball_BrickGame::Ball_BrickGame(DiemSo* d, Thanh* p)
 void Ball_BrickGame::CapNhat(sf::RenderWindow* window)
 {
 	// kiem tra va cham voi thanh
-	if (KiemTraVaCham(player))
+	if (getPosition().x >= player->getPosition().x - player->getGlobalBounds().width -20 &&
+		getPosition().x <= player->getPosition().x + player->getGlobalBounds().width + 20)
 	{
-		VanToc.y = -VanToc.y; 
-		VanToc.y * 1.1;  
-		VanToc.x *= 1.1; 
+		if (getPosition().y >= player->getPosition().y - player->getGlobalBounds().height/2)
+		{
+			VanToc.y = -VanToc.y;
+			VanToc.y * 1.1;
+			VanToc.x *= 1.1;
+			sound->play();
+		}
     }
 	// cham tuong tren
 	if (getPosition().y < 0 )
 	{
 		VanToc.y *= -1; 
+		sound->play();
 	}
 	// cham tuong duoi
 	if (this->getPosition().y + this->getGlobalBounds().height >= window->getSize().y)

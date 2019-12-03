@@ -20,12 +20,13 @@ void Brick_BrickGame::CapNhat(Ball_BrickGame*& m_ball)
 {
 	Vector2f brickPos = this->getPosition();
 	Vector2f ballPos = m_ball->getPosition();
+	Vector2f brickSize(getGlobalBounds().width, getGlobalBounds().height);
 	if (KiemTraVaCham(m_ball))
 	{
-		int top = abs(ballPos.y - brickPos.y - 15);
-		int bot = abs(ballPos.y - brickPos.y + 15);
-		int left = abs(ballPos.x - brickPos.x - 45);
-		int right = abs(ballPos.x - brickPos.x + 45);
+		int top = abs(ballPos.y - brickPos.y - brickSize.y/2);
+		int bot = abs(ballPos.y - brickPos.y + brickSize.y/2);
+		int left = abs(ballPos.x - brickPos.x - brickSize.x / 2);
+		int right = abs(ballPos.x - brickPos.x + brickSize.x / 2);
 		int min = top;
 		if (bot < min)
 		{
