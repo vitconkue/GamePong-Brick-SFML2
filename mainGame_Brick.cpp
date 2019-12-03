@@ -39,13 +39,13 @@ void mainGame_Brick::CapNhat(RenderWindow* window)
 			coreState.SetTrangThai(new Menu());
 		}
 	}
-	else if(ball->getLive() == 0)
+	else if (ball->getLive() == 0)
 	{
-		endGame = true; 
+		endGame = true;
 	}
-	// con 1 truong hop thang nua
+	else if (brick.empty()) endGame = true; 
 	else {
-		ball->CapNhat(window);
+		ball->CapNhat(window, point);
 		player->CapNhat(window);
 		//Cap Nhap Brick
 		for (int i = 0; i < brick.size(); i++)
@@ -56,7 +56,25 @@ void mainGame_Brick::CapNhat(RenderWindow* window)
 		{
 			if (brick[i]->getShieldNumber() == 0)
 			{
+				Brick_Prize* newPrize = new Brick_Prize; 
+				newPrize->TaoTexture(); 
+				newPrize->setPosition(brick[i]->getPosition()); 
+				prize.push_back(newPrize);
 				brick.erase(brick.begin() + i);
+			}
+		}
+		// Cap nhat vat the
+		   // cap nhat tung vat the
+		for (int i = 0; i < prize.size(); i++)
+		{
+			prize[i]->CapNhat(player,point); 
+		}
+		   // xoa vat the khoi man hinh
+		for (int i = 0; i < prize.size(); i++)
+		{
+			if (prize[i]->getTouchedPlayer() || prize[i]->getTouchedFloor())
+			{
+				prize.erase(prize.begin() + i);
 			}
 		}
 		point->CapNhat();
@@ -78,6 +96,10 @@ void mainGame_Brick::Xuat(RenderWindow* window)
 	for (int i = 0; i < brick.size(); i++)
 	{
 		window->draw(*brick[i]);
+	}
+	for (int i = 0; i < prize.size(); i++)
+	{
+		window->draw(*prize[i]); 
 	}
 	if (paused)
 	{

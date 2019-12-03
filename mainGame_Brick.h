@@ -5,6 +5,7 @@
 #include "Ball_BrickGame.h"
 #include "Menu.h"
 #include"Brick_BrickGame.h"
+#include "Brick_Prize.h"
 class mainGame_Brick : public TrangThai
 {
 public: 
@@ -15,6 +16,7 @@ public:
 	void LoadBrick();
 private: 
 	vector<Brick_BrickGame*> brick;
+	vector<Brick_Prize*> prize; 
 	ThanhNguoiChoi_Brick* player; 
 	Ball_BrickGame* ball; 
 	DiemSo* point; 

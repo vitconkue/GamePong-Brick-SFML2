@@ -138,6 +138,7 @@
     <ClCompile Include="Ball_BrickGame.cpp" />
     <ClCompile Include="Bong.cpp" />
     <ClCompile Include="Brick_BrickGame.cpp" />
+    <ClCompile Include="Brick_Prize.cpp" />
     <ClCompile Include="DiemSo.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainGame.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="Ball_BrickGame.h" />
     <ClInclude Include="Bong.h" />
     <ClInclude Include="Brick_BrickGame.h" />
+    <ClInclude Include="Brick_Prize.h" />
     <ClInclude Include="DiemSo.h" />
     <ClInclude Include="mainGame.h" />
     <ClInclude Include="mainGame_Brick.h" />

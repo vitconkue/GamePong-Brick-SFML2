@@ -1,6 +1,8 @@
 #pragma once
 #include"VatThe.h"
 #include"Ball_BrickGame.h"
+#include "Brick_Prize.h"
+#include <vector>
 
 class Brick_BrickGame: public VatThe
 {
