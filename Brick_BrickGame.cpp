@@ -21,32 +21,72 @@ void Brick_BrickGame::CapNhat(Ball_BrickGame*& m_ball)
 	Vector2f brickPos = this->getPosition();
 	Vector2f ballPos = m_ball->getPosition();
 	Vector2f brickSize(getGlobalBounds().width, getGlobalBounds().height);
+	Vector2f ballSize(m_ball->getGlobalBounds().width, m_ball->getGlobalBounds().height);
 	if (KiemTraVaCham(m_ball))
 	{
-		int top = abs(ballPos.y - brickPos.y - brickSize.y/2);
-		int bot = abs(ballPos.y - brickPos.y + brickSize.y/2);
-		int left = abs(ballPos.x - brickPos.x - brickSize.x / 2);
-		int right = abs(ballPos.x - brickPos.x + brickSize.x / 2);
-		int min = top;
-		if (bot < min)
+		if (m_ball->VanToc.x > 0 && m_ball->VanToc.y < 0)
 		{
-			min = bot;
+			if (ballPos.x > brickPos.x - brickSize.x / 2 + ballSize.x / 2)
+			{
+				m_ball->VanToc.y *= -1;
+			}
+			else if(ballPos.y < brickPos.y + brickSize.y / 2 - ballSize.y / 2)
+			{
+				m_ball->VanToc.x *= -1;
+			}
+			else
+			{
+				m_ball->VanToc.x *= -1;
+				m_ball->VanToc.y *= -1;
+			}
 		}
-		if (left < min)
+		else if (m_ball->VanToc.x > 0 && m_ball->VanToc.y > 0)
 		{
-			min = left;
+			if (ballPos.x > brickPos.x - brickSize.x / 2 + ballSize.x / 2)
+			{
+				m_ball->VanToc.y *= -1;
+			}
+			else if (ballPos.y > brickPos.y - brickSize.y / 2 + ballSize.y / 2)
+			{
+				m_ball->VanToc.x *= -1;
+			}
+			else
+			{
+				m_ball->VanToc.x *= -1;
+				m_ball->VanToc.y *= -1;
+			}
 		}
-		if (right < min)
+		else if (m_ball->VanToc.x < 0 && m_ball->VanToc.y < 0)
 		{
-			min = right;
+			if (ballPos.x < brickPos.x + brickSize.x / 2 - ballSize.x/2)
+			{
+				m_ball->VanToc.y *= -1;
+			}
+			else if(ballPos.y < brickPos.y + brickSize.y / 2 - ballSize.y / 2)
+			{
+				m_ball->VanToc.x *= -1;
+			}
+			else
+			{
+				m_ball->VanToc.x *= -1;
+				m_ball->VanToc.y *= -1;
+			}
 		}
-		if (min == top || min == bot)
+		else if (m_ball->VanToc.x < 0 && m_ball->VanToc.y > 0)
 		{
-			m_ball->VanToc.y *= -1;
-		}
-		if (min == left || min == right)
-		{
-			m_ball->VanToc.x *= -1;
+			if (ballPos.x < brickPos.x + brickSize.x / 2  - ballSize.x/2)
+			{
+				m_ball->VanToc.y *= -1;
+			}
+			else if(ballPos.y > brickPos.y - brickSize.y / 2 + ballSize.y / 2)
+			{
+				m_ball->VanToc.x *= -1;
+			}
+			else
+			{
+				m_ball->VanToc.x *= -1;
+				m_ball->VanToc.y *= -1;
+			}
 		}
 		Shield--;
 		TaoTexture();
