@@ -4,6 +4,7 @@
 #include "DiemSo.h"
 #include "Ball_BrickGame.h"
 #include "Menu.h"
+#include"Brick_BrickGame.h"
 class mainGame_Brick : public TrangThai
 {
 public: 
@@ -11,7 +12,9 @@ public:
 	void CapNhat(RenderWindow* window);
 	void Xuat(RenderWindow* window);
 	void Destroy(RenderWindow* window);
+	void LoadBrick();
 private: 
+	vector<Brick_BrickGame*> brick;
 	ThanhNguoiChoi_Brick* player; 
 	Ball_BrickGame* ball; 
 	DiemSo* point; 

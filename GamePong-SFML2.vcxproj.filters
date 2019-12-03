@@ -51,6 +51,9 @@
     <ClCompile Include="ThanhNguoiChoi_Brick.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Brick_BrickGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VatThe.h">
@@ -84,6 +87,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ThanhNguoiChoi_Brick.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Brick_BrickGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

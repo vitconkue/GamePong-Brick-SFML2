@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <SFML/Graphics.hpp>
 #include <string>
+#include<iostream>
 using namespace sf;
 using namespace std;
 //class Vật thể là class cha để class Bóng và Thanh kế thừa 
@@ -26,7 +27,6 @@ public:
 	{
 		return this->getGlobalBounds().intersects(thucthe->getGlobalBounds());
 	}
-
 	VatThe()
 	{
 		this->texture = new Texture();
@@ -35,4 +35,5 @@ public:
 	{
 		delete this->texture;
 	}
+
 };
