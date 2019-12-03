@@ -2,6 +2,8 @@
 #include <iostream>
 Ball_BrickGame::Ball_BrickGame(DiemSo* d, Thanh* p)
 {
+	this->VanToc.x = 1;
+	this->VanToc.y = 1;
 	lives = 4; 
 	Load("ball.png"); 
 	diem = d; 
@@ -38,6 +40,7 @@ void Ball_BrickGame::CapNhat(sf::RenderWindow* window)
 	{
 		VanToc.x *= -1; 
 	}
+
 	VatThe::CapNhat(); 
 }
 

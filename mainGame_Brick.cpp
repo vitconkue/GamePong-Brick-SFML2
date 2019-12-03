@@ -2,6 +2,7 @@
 
 void mainGame_Brick::KhoiTao(RenderWindow* window)
 {
+	window->setFramerateLimit(120);
 	this->font = new sf::Font();
 	this->font->loadFromFile("Graphics/font.ttf");
 	player = new ThanhNguoiChoi_Brick;
@@ -22,6 +23,7 @@ void mainGame_Brick::KhoiTao(RenderWindow* window)
 	this->paused = false;
 	this->enterKey = false;
 	this->endGame = false;
+	LoadBrick();
 }
 
 void mainGame_Brick::CapNhat(RenderWindow* window)
@@ -45,6 +47,18 @@ void mainGame_Brick::CapNhat(RenderWindow* window)
 	else {
 		ball->CapNhat(window);
 		player->CapNhat(window);
+		//Cap Nhap Brick
+		for (int i = 0; i < brick.size(); i++)
+		{
+			brick[i]->CapNhat(ball);
+		}
+		for (int i = 0; i < brick.size(); i++)
+		{
+			if (brick[i]->getShieldNumber() == 0)
+			{
+				brick.erase(brick.begin() + i);
+			}
+		}
 		point->CapNhat();
 		if (Keyboard::isKeyPressed(Keyboard::Key::P) && !enterKey) 
 			paused = true;
@@ -61,6 +75,10 @@ void mainGame_Brick::Xuat(RenderWindow* window)
 	window->draw(*ball); 
 	window->draw(*player); 
 	window->draw(*point); 
+	for (int i = 0; i < brick.size(); i++)
+	{
+		window->draw(*brick[i]);
+	}
 	if (paused)
 	{
 		window->draw(*pausedText); 
@@ -95,9 +113,30 @@ void mainGame_Brick::Xuat(RenderWindow* window)
 	}
 }
 
+
 void mainGame_Brick::Destroy(RenderWindow* window)
 {
 	delete player; 
 	delete ball; 
 	delete font; 
+}
+
+void mainGame_Brick::LoadBrick()
+{
+	for (int i = 1; i < 6; i++)
+	{
+		for (int j = 1; j < 4; j++)
+		{
+			Vector2f brickSize;
+			brickSize.x = 90;
+			brickSize.y = 30;
+			Brick_BrickGame* b = new Brick_BrickGame;
+			b->setShieldNumber(3);
+			b->setPosition(i * 200, j * 200);
+			b->setOrigin(brickSize / 2.f);
+			b->TaoTexture();
+			brick.push_back(b);
+		}
+	}
+
 }
