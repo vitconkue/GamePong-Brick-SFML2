@@ -15,6 +15,7 @@ public:
 	Ball_BrickGame(DiemSo* d, Thanh* p); 
 	void CapNhat(sf::RenderWindow* window, DiemSo*& point); 
 	void reset(sf::RenderWindow* window); 
+	void setPlayer(Thanh* _player); 
 	int getLive() { return lives; }
 	~Ball_BrickGame(); 
 };

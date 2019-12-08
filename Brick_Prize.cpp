@@ -13,7 +13,7 @@ Brick_Prize::Brick_Prize()
 	touched_floor = false;
 }
 
-void Brick_Prize::CapNhat(ThanhNguoiChoi_Brick*& player, DiemSo*& point)
+void Brick_Prize::CapNhat(ThanhNguoiChoi_Brick*& player, DiemSo*& point, Ball_BrickGame*& _ball)
 {
 	VatThe::CapNhat();
 	if (KiemTraVaCham(player))
@@ -29,9 +29,11 @@ void Brick_Prize::CapNhat(ThanhNguoiChoi_Brick*& player, DiemSo*& point)
 			break; 
 		case 3: 
 			player->setScale(2.0, 1.0); 
+			_ball->setPlayer(player); 
 			break; 
 		case 4: 
 			player->setScale(0.5, 1.0);
+			_ball->setPlayer(player);
 			break; 
 		}
 	}

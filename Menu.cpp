@@ -11,7 +11,7 @@ void Menu::KhoiTao(RenderWindow* window)
 	this->font = new Font();
 	this->font->loadFromFile("Graphics/font.ttf");
 	//Tên game
-	this->tengame = new Text("PingPong Game", *this->font, 128U);
+	this->tengame = new Text("PingPong Game - Brick Game", *this->font, 110U);
 	this->tengame->setOrigin(this->tengame->getGlobalBounds().width / 2, this->tengame->getGlobalBounds().height / 2);
 	this->tengame->setPosition(window->getSize().x / 2, window->getSize().y / 8);
 	//Nút bắt đầu
@@ -21,13 +21,13 @@ void Menu::KhoiTao(RenderWindow* window)
 	// Nút bắt đầu chế độ brick
 	this->choi2 = new Text("Bat dau Brick", *font, 128U);
 	this->choi2->setOrigin(choi2->getGlobalBounds().width / 2, choi2->getGlobalBounds().height / 2); 
-	this->choi2->setPosition(window->getSize().x / 2, window->getSize().y / 3 + 80); 
+	this->choi2->setPosition(window->getSize().x / 2, window->getSize().y / 3 + 90); 
 	//Nút thoát
 	this->thoat = new Text("Thoat", *this->font, 128U);
 	this->thoat->setOrigin(this->thoat->getGlobalBounds().width / 2, this->thoat->getGlobalBounds().height / 2);
 	this->thoat->setPosition(window->getSize().x / 2, window->getSize().y / 3 + this->choi->getGlobalBounds().height + 100);
 
-	this->madeby = new Text("Made by 18120164 - 18120174", *this->font, 30U);
+	this->madeby = new Text("Made by 18120154 - 18120186", *this->font, 30U);
 	this->madeby->setOrigin(this->madeby->getGlobalBounds().width / 2, this->madeby->getGlobalBounds().height / 2);
 	this->madeby->setPosition(3 * window->getSize().x / 4, window->getSize().y / 2 + this->thoat->getGlobalBounds().height + this->choi->getGlobalBounds().height);
 }
@@ -81,11 +81,17 @@ void Menu::Xuat(sf::RenderWindow* window)
 	{
 	case 0:
 		this->choi->setFillColor(Color::Green);
+		this->choi2->setFillColor(Color::White);
+		this->thoat->setFillColor(Color::White); 
 		break;
 	case 1: 
 		this->choi2->setFillColor(Color::Green); 
+		this->thoat->setFillColor(Color::White);
+		this->choi->setFillColor(Color::White);
 		break; 
 	case 2:
+		this->choi->setFillColor(Color::White);
+		this->choi2->setFillColor(Color::White);
 		this->thoat->setFillColor(Color::Green);
 		break;
 	}

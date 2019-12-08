@@ -67,7 +67,7 @@ void mainGame_Brick::CapNhat(RenderWindow* window)
 		   // cap nhat tung vat the
 		for (int i = 0; i < prize.size(); i++)
 		{
-			prize[i]->CapNhat(player,point); 
+			prize[i]->CapNhat(player,point,ball); 
 		}
 		   // xoa vat the khoi man hinh
 		for (int i = 0; i < prize.size(); i++)

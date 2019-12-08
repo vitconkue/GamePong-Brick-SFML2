@@ -60,6 +60,11 @@ void Ball_BrickGame::reset(sf::RenderWindow* window)
 	
 }
 
+void Ball_BrickGame::setPlayer(Thanh* _player)
+{
+	player = _player; 
+}
+
 Ball_BrickGame::~Ball_BrickGame()
 {
 	delete sound; 

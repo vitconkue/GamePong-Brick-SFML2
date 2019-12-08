@@ -20,7 +20,7 @@ public :
 	bool getTouchedPlayer() { return touched_player; }
 	bool getTouchedFloor() { return touched_floor;  }
 	Brick_Prize(); 
-	void CapNhat(ThanhNguoiChoi_Brick*&player, DiemSo*& point); 
+	void CapNhat(ThanhNguoiChoi_Brick*&player, DiemSo*& point, Ball_BrickGame*& ball); 
 	void TaoTexture(); 
 };
 
