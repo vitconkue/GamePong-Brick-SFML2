@@ -23,12 +23,16 @@ void Brick_Prize::CapNhat(ThanhNguoiChoi_Brick*& player, DiemSo*& point)
 		{
 		case 1:
 			point->setDiem(point->GetDiem() * 2);
+			break; 
 		case 2: 
 			point->setDiem(point->GetDiem() / 2); 
+			break; 
 		case 3: 
 			player->setScale(2.0, 1.0); 
+			break; 
 		case 4: 
 			player->setScale(0.5, 1.0);
+			break; 
 		}
 	}
 	if (getPosition().y > player->getPosition().y + 20)
@@ -44,12 +48,16 @@ void Brick_Prize::TaoTexture()
 	{
 	case 1: 
 		Load("object2.png");
+		break; 
 	case 2: 
 		Load("object12.png");
+		break; 
 	case 3 : 
 		Load("objectIncreaseLength.png");
+		break; 
 	case 4 : 
 		Load("objectDecreaseLength.png"); 
+		break; 
 	}
 }
 
