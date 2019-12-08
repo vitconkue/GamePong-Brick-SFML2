@@ -2,8 +2,8 @@
 #include <iostream>
 Ball_BrickGame::Ball_BrickGame(DiemSo* d, Thanh* p)
 {
-	this->VanToc.x = 1;
-	this->VanToc.y = 1;
+	this->VanToc.x = 1.5;
+	this->VanToc.y = 1.5;
 	lives = 4; 
 	Load("ball.png"); 
 	diem = d; 
@@ -17,8 +17,8 @@ Ball_BrickGame::Ball_BrickGame(DiemSo* d, Thanh* p)
 void Ball_BrickGame::CapNhat(sf::RenderWindow* window, DiemSo*& point)
 {
 	// kiem tra va cham voi thanh
-	if (getPosition().x >= player->getPosition().x - player->getGlobalBounds().width -20 &&
-		getPosition().x <= player->getPosition().x + player->getGlobalBounds().width + 20)
+	if (getPosition().x >= player->getPosition().x - (player->getGlobalBounds().width)/2   &&
+		getPosition().x <= player->getPosition().x + (player->getGlobalBounds().width)/2 )
 	{
 		if (getPosition().y >= player->getPosition().y - player->getGlobalBounds().height/2)
 		{
@@ -36,7 +36,7 @@ void Ball_BrickGame::CapNhat(sf::RenderWindow* window, DiemSo*& point)
 		sound->play();
 	}
 	// cham tuong duoi
-	if (this->getPosition().y + this->getGlobalBounds().height >= window->getSize().y)
+	if (getPosition().y > player->getPosition().y - player->getGlobalBounds().height / 2 + 2)
 	{
 		lives--;
 		reset(window); 

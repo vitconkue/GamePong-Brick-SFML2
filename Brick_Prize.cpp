@@ -28,11 +28,11 @@ void Brick_Prize::CapNhat(ThanhNguoiChoi_Brick*& player, DiemSo*& point, Ball_Br
 			point->setDiem(point->GetDiem() / 2); 
 			break; 
 		case 3: 
-			player->setScale(2.0, 1.0); 
+			player->setScale(player->getScale().x * 2, 1.0); 
 			_ball->setPlayer(player); 
 			break; 
 		case 4: 
-			player->setScale(0.5, 1.0);
+			player->setScale(player->getScale().x / 2, 1.0);
 			_ball->setPlayer(player);
 			break; 
 		}
