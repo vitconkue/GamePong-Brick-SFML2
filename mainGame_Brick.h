@@ -24,6 +24,7 @@ private:
 	Font* font; 
 	Text* win; 
 	Text* lose; 
+	int Effect;
 	bool paused, enterKey; 
 	bool endGame; 
 };

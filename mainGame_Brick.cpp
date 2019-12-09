@@ -23,6 +23,7 @@ void mainGame_Brick::KhoiTao(RenderWindow* window)
 	this->paused = false;
 	this->enterKey = false;
 	this->endGame = false;
+	Effect = 1;
 	LoadBrick();
 }
 
@@ -50,7 +51,7 @@ void mainGame_Brick::CapNhat(RenderWindow* window)
 		//Cap Nhap Brick
 		for (int i = 0; i < brick.size(); i++)
 		{
-			brick[i]->CapNhat(ball);
+			brick[i]->CapNhat(ball, point);
 		}
 		for (int i = 0; i < brick.size(); i++)
 		{
@@ -85,6 +86,27 @@ void mainGame_Brick::CapNhat(RenderWindow* window)
 			ball->reset(window); 
 	}
 	this->enterKey = Keyboard::isKeyPressed(Keyboard::Key::P);
+	//Cap nhật hiệu ứng Paddle
+	Effect++;
+	if (Effect == 61)
+	{
+		Effect == 1;
+	}
+	if (Effect < 20)
+	{
+		player->Load("BPaddle1.png");
+		Effect++;
+	}
+	else if (Effect >= 20&&Effect <= 40)
+	{
+		player->Load("BPaddle2.png");
+		Effect++;
+	}
+	else if(Effect > 40)
+	{
+		player->Load("BPaddle3.png");
+		Effect = 1;
+	}
 }
 
 

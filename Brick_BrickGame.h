@@ -13,7 +13,7 @@ public:
 	int getShieldNumber();
 	void setShieldNumber(int number);
 	Brick_BrickGame();
-	void CapNhat(Ball_BrickGame*& m_ball);
+	void CapNhat(Ball_BrickGame*& m_ball, DiemSo*& point);
 	void TaoTexture();
 };
 

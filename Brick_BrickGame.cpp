@@ -16,7 +16,7 @@ int Brick_BrickGame::getShieldNumber()
 	return Shield;
 }
 
-void Brick_BrickGame::CapNhat(Ball_BrickGame*& m_ball)
+void Brick_BrickGame::CapNhat(Ball_BrickGame*& m_ball, DiemSo*& point)
 {
 	Vector2f brickPos = this->getPosition();
 	Vector2f ballPos = m_ball->getPosition();
@@ -89,6 +89,14 @@ void Brick_BrickGame::CapNhat(Ball_BrickGame*& m_ball)
 			}
 		}
 		Shield--;
+		if (Shield == 0)
+		{
+			point->TangThem(100);
+		}
+		else
+		{
+			point->TangThem(50);
+		}
 		TaoTexture();
 	}
 }
