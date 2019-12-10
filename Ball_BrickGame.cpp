@@ -11,19 +11,20 @@ Ball_BrickGame::Ball_BrickGame(DiemSo* d, Thanh* p)
 	buffer = new SoundBuffer(); 
 	buffer->loadFromFile("Sounds/bounce.wav"); 
 	this->sound = new Sound(*this->buffer);
-
+	this->setOrigin(Vector2f(getTexture()->getSize().x * 0.5, getTexture()->getSize().y * 0.5));
 }
 
 void Ball_BrickGame::CapNhat(sf::RenderWindow* window, DiemSo*& point)
 {
 	// kiem tra va cham voi thanh
-	if (getPosition().x >= player->getPosition().x - (player->getGlobalBounds().width)/2   &&
-		getPosition().x <= player->getPosition().x + (player->getGlobalBounds().width)/2 )
+	sf::Vector2u playerSize = Vector2u(player->getGlobalBounds().width, player->getGlobalBounds().height); 
+	if (getPosition().x >= player->getPosition().x - playerSize.x/2 -5  &&
+		getPosition().x <= player->getPosition().x + playerSize.x /2 + 5)
 	{
-		if (getPosition().y >= player->getPosition().y - player->getGlobalBounds().height/2)
+		if (getPosition().y >= player->getPosition().y - playerSize.y/2)
 		{
 			VanToc.y = -VanToc.y;
-			VanToc.y * 1.1;
+			VanToc.y *= 1.1;
 			VanToc.x *= 1.1;
 			sound->play();
 			point->TangThem(1);
