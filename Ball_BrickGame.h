@@ -19,5 +19,6 @@ public:
 	void setPlayer(Thanh* _player); 
 	int getLive() { return lives; }
 	~Ball_BrickGame(); 
+
 };
 

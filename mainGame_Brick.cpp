@@ -188,6 +188,34 @@ void mainGame_Brick::InputName()
 	fout.close();
 }
 
+void mainGame_Brick::InputName2(RenderWindow* window)
+{
+	/*string playerName; 
+	Text playerNameText("", *font, 30U);
+	RenderWindow inputNameWindow(VideoMode(900, 600), "Input"); 
+	playerNameText.setPosition(inputNameWindow.getSize().x / 2, inputNameWindow.getSize().y / 2); 
+	while (inputNameWindow.isOpen())
+	{
+		Event event; 
+		while (inputNameWindow.pollEvent(event))
+		{
+			if (event.type == Event::Closed)
+				inputNameWindow.close();
+			if (event.type == Event::TextEntered)
+			{
+				std::cout << "Text entered. " << endl; 
+				playerName += event.key.code; 
+				playerNameText.setString(playerName); 
+				inputNameWindow.draw(playerNameText);
+				inputNameWindow.clear();
+				inputNameWindow.display();
+			}
+		}
+		
+	}
+	*/
+}
+
 void mainGame_Brick::LoadBrick()
 {
 	for (int i = 1; i < 8; i++)

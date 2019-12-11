@@ -15,6 +15,7 @@ public:
 	void Xuat(RenderWindow* window);
 	void Destroy(RenderWindow* window);
 	void InputName(); 
+	void InputName2(RenderWindow* window);
 	void LoadBrick();
 private: 
 	vector<Brick_BrickGame*> brick;
