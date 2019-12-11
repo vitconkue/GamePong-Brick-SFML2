@@ -24,7 +24,7 @@ void mainGame_Brick::KhoiTao(RenderWindow* window)
 	this->enterKey = false;
 	this->endGame = false;
 	Effect = 1;
-	LoadBrick();
+	LoadBrick("BrickLevel/level1.txt");
 }
 
 void mainGame_Brick::CapNhat(RenderWindow* window)
@@ -131,28 +131,30 @@ void mainGame_Brick::Xuat(RenderWindow* window)
 	if (endGame)
 	{
 		if (ball->getLive() == 0) // truong hop thua
-		{
+		{ 
 			window->draw(*lose);
-			InputName(); 
 			if (Keyboard::isKeyPressed(Keyboard::Key::Enter))
 			{
+				InputName2(window);
 				coreState.SetTrangThai(new mainGame_Brick());
 			}
 			else if (Keyboard::isKeyPressed(Keyboard::Key::Escape))
 			{
+				InputName2(window);
 				coreState.SetTrangThai(new Menu());
 			}
 		}
 		else // truong hop thang
 		{
 			window->draw(*win);
-			InputName(); 
 			if (Keyboard::isKeyPressed(Keyboard::Key::Enter))
 			{
+				//InputName2(window);
 				coreState.SetTrangThai(new mainGame_Brick());
 			}
 			else if (Keyboard::isKeyPressed(Keyboard::Key::Escape))
 			{
+				InputName2(window);
 				coreState.SetTrangThai(new Menu());
             }
 		}
@@ -190,91 +192,99 @@ void mainGame_Brick::InputName()
 
 void mainGame_Brick::InputName2(RenderWindow* window)
 {
-	/*string playerName; 
+	string playerName=""; 
+	string temp = "Enter Yourname: ";
 	Text playerNameText("", *font, 30U);
-	RenderWindow inputNameWindow(VideoMode(900, 600), "Input"); 
-	playerNameText.setPosition(inputNameWindow.getSize().x / 2, inputNameWindow.getSize().y / 2); 
-	while (inputNameWindow.isOpen())
+	playerNameText.setString(temp);
+	playerNameText.setCharacterSize(100);
+	playerNameText.setPosition(0, 300);
+	window->clear();
+	window->draw(playerNameText);
+	window->display();
+	int kt = 0;
+	while (kt==0)
 	{
 		Event event; 
-		while (inputNameWindow.pollEvent(event))
+		while (window->pollEvent(event))
 		{
-			if (event.type == Event::Closed)
-				inputNameWindow.close();
 			if (event.type == Event::TextEntered)
 			{
-				std::cout << "Text entered. " << endl; 
-				playerName += event.key.code; 
-				playerNameText.setString(playerName); 
-				inputNameWindow.draw(playerNameText);
-				inputNameWindow.clear();
-				inputNameWindow.display();
+				if (event.key.code == 8)
+				{
+					playerName.pop_back();
+					playerNameText.setString(temp + playerName);
+					playerNameText.setCharacterSize(100);
+					playerNameText.setPosition(0, 300);
+					window->clear();
+					window->draw(playerNameText);
+					window->display();
+					std::cout << playerName << endl;
+				}
+				else if (event.key.code == 13)
+				{
+					fstream f;
+					int currentNum;
+					f.open("Highscores.txt", ios::in);
+					f >> currentNum;
+					f.close();
+					currentNum = currentNum + 1;
+					f.close();
+					f.open("Highscores.txt", ios::in | ios::out);
+					f << currentNum;
+					f.close();
+					fstream fout;
+					fout.open("Highscores.txt", fstream::app);
+					fout << playerName << ":" << point->GetDiem() << endl;
+					fout.close();
+					window->clear();
+					kt = 1;
+					break;
+				}
+				else
+				{
+					playerName += event.key.code;
+					playerNameText.setString(temp + playerName);
+					playerNameText.setCharacterSize(100);
+					playerNameText.setPosition(0, 300);
+					window->clear();
+					window->draw(playerNameText);
+					window->display();
+					std::cout << playerName << endl;
+				}
 			}
 		}
 		
 	}
-	*/
+	
 }
 
-void mainGame_Brick::LoadBrick()
+void mainGame_Brick::LoadBrick(string filename)
 {
-	for (int i = 1; i < 8; i++)
+	fstream f;
+	f.open(filename, ios::in);
+	while (!f.eof())
 	{
-		for (int j = 1; j < 4; j++)
+		Vector2f BrickPos;
+		int Sheild;
+		char Color;
+		f >> BrickPos.x >> BrickPos.y >> Sheild >> Color;
+		Vector2f brickSize;
+		brickSize.x = 90;
+		brickSize.y = 30;
+		Brick_BrickGame* b = new Brick_BrickGame;
+		if (Color == 'm')
 		{
-			Vector2f brickSize;
-			brickSize.x = 90;
-			brickSize.y = 30;
-			Brick_BrickGame* b = new Brick_BrickGame;
-			b->setShieldNumber(3);
-			b->setPosition(i * 150, j * 200);
-			b->setOrigin(brickSize / 2.f);
-			switch (i)
-			{
-			case 1:
-			{
-				b->setBrickColor('b');
-				break;
-			}
-			case 2:
-			{
-				b->setBrickColor('g');
-				break;
-			}
-
-			case 3:
-			{
-				b->setBrickColor('o');
-				break;
-			}
-
-			case 4:
-			{
-				b->setBrickColor('r');
-				break;
-			}
-			case 5:
-			{
-				b->setBrickColor('v');
-				break;
-			}
-
-			case 6:
-			{
-				b->setBrickColor('y');
-				break;
-			}
-
-			case 7:
-			{
-				b->setBrickColor('m');
-				b->setShieldNumber(4);
-				break;
-			}
-			}
-			b->TaoTexture();
-			brick.push_back(b);
+			b->setShieldNumber(4);
 		}
+		else
+		{
+			b->setShieldNumber(Sheild);
+		}
+		b->setPosition(BrickPos);
+		b->setOrigin(brickSize / 2.f);
+		b->setBrickColor(Color);
+		b->TaoTexture();
+		brick.push_back(b);
 	}
-
+	brick.pop_back();
 }

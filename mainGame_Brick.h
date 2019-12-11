@@ -16,7 +16,7 @@ public:
 	void Destroy(RenderWindow* window);
 	void InputName(); 
 	void InputName2(RenderWindow* window);
-	void LoadBrick();
+	void LoadBrick(string filename);
 private: 
 	vector<Brick_BrickGame*> brick;
 	vector<Brick_Prize*> prize; 

@@ -26,9 +26,8 @@ int main()
 		window.display();
 	    if (quitGame)
 		{
-				window.close();
+			window.close();
 		}
-			//Sleep(5);
 	}
 	system("pause");
 	return 0;

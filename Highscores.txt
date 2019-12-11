@@ -1,4 +1,4 @@
-7
+8
 TestPlayer1:120
 An:483
 TestPlayer2:278
@@ -6,3 +6,4 @@ Linh:352
 Hoa:145
 Khanh:516
 Minh:444
+Test:875
