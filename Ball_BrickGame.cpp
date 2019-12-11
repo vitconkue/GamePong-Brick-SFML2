@@ -14,7 +14,7 @@ Ball_BrickGame::Ball_BrickGame(DiemSo* d, Thanh* p)
 	this->setOrigin(Vector2f(getTexture()->getSize().x * 0.5, getTexture()->getSize().y * 0.5));
 }
 
-void Ball_BrickGame::CapNhat(sf::RenderWindow* window, DiemSo*& point)
+void Ball_BrickGame::CapNhat(sf::RenderWindow* window, DiemSo*& point, ThanhNguoiChoi_Brick* player)
 {
 	// kiem tra va cham voi thanh
 	sf::Vector2u playerSize = Vector2u(player->getGlobalBounds().width, player->getGlobalBounds().height); 
@@ -23,11 +23,14 @@ void Ball_BrickGame::CapNhat(sf::RenderWindow* window, DiemSo*& point)
 	{
 		if (getPosition().y >= player->getPosition().y - playerSize.y/2)
 		{
-			VanToc.y = -VanToc.y;
-			VanToc.y *= 1.1;
-			VanToc.x *= 1.1;
+			double speed = sqrt(VanToc.x * VanToc.x + VanToc.y * VanToc.y);
+			speed *= 1.1;
+			Vector2f ballPos = this->getPosition();
+			Vector2f PaddlePos = player->getPosition();
+			double P = (PaddlePos.x - ballPos.x) / (player->getGlobalBounds().width / 4);
+			VanToc.y = - sqrt((speed * speed) / (P * P + 1));
+			VanToc.x = VanToc.y * P;
 			sound->play();
-			point->TangThem(1);
 		}
     }
 	// cham tuong tren

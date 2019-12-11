@@ -3,6 +3,7 @@
 #include "VatThe.h"
 #include "Thanh.h"
 #include "DiemSo.h"
+#include"ThanhNguoiChoi_Brick.h"
 class Ball_BrickGame : public VatThe
 {
 private: 
@@ -13,7 +14,7 @@ private:
 	sf::Sound* sound; 
 public: 
 	Ball_BrickGame(DiemSo* d, Thanh* p); 
-	void CapNhat(sf::RenderWindow* window, DiemSo*& point); 
+	void CapNhat(sf::RenderWindow* window, DiemSo*& point, ThanhNguoiChoi_Brick* player); 
 	void reset(sf::RenderWindow* window); 
 	void setPlayer(Thanh* _player); 
 	int getLive() { return lives; }

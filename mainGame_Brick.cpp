@@ -46,7 +46,7 @@ void mainGame_Brick::CapNhat(RenderWindow* window)
 	}
 	else if (brick.empty()) endGame = true; 
 	else {
-		ball->CapNhat(window, point);
+		ball->CapNhat(window, point, player);
 		player->CapNhat(window);
 		//Cap Nhap Brick
 		for (int i = 0; i < brick.size(); i++)
