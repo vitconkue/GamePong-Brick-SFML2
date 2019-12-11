@@ -15,17 +15,21 @@ void Menu::KhoiTao(RenderWindow* window)
 	this->tengame->setOrigin(this->tengame->getGlobalBounds().width / 2, this->tengame->getGlobalBounds().height / 2);
 	this->tengame->setPosition(window->getSize().x / 2, window->getSize().y / 8);
 	//Nút bắt đầu
-	this->choi = new Text("Bat dau Pong", *this->font, 128U);
+	this->choi = new Text("Bat dau Pong", *this->font, 90U);
 	this->choi->setOrigin(this->choi->getGlobalBounds().width / 2, this->choi->getGlobalBounds().height / 2);
 	this->choi->setPosition(window->getSize().x / 2, window->getSize().y / 3);
 	// Nút bắt đầu chế độ brick
-	this->choi2 = new Text("Bat dau Brick", *font, 128U);
+	this->choi2 = new Text("Bat dau Brick", *font, 90U);
 	this->choi2->setOrigin(choi2->getGlobalBounds().width / 2, choi2->getGlobalBounds().height / 2); 
-	this->choi2->setPosition(window->getSize().x / 2, window->getSize().y / 3 + 90); 
+	this->choi2->setPosition(window->getSize().x / 2, window->getSize().y / 3 + 60); 
+	// Nút vào highscore
+	this->highscore_menu = new Text("Diem cao ", *font, 90U);
+	this->highscore_menu->setOrigin(highscore_menu->getGlobalBounds().width / 2, highscore_menu->getGlobalBounds().height / 2);
+	this->highscore_menu->setPosition(window->getSize().x / 2, window->getSize().y / 3 + 120); 
 	//Nút thoát
 	this->thoat = new Text("Thoat", *this->font, 128U);
 	this->thoat->setOrigin(this->thoat->getGlobalBounds().width / 2, this->thoat->getGlobalBounds().height / 2);
-	this->thoat->setPosition(window->getSize().x / 2, window->getSize().y / 3 + this->choi->getGlobalBounds().height + 100);
+	this->thoat->setPosition(window->getSize().x / 2, window->getSize().y / 3 + this->choi->getGlobalBounds().height + 150);
 
 	this->madeby = new Text("Made by 18120154 - 18120186", *this->font, 30U);
 	this->madeby->setOrigin(this->madeby->getGlobalBounds().width / 2, this->madeby->getGlobalBounds().height / 2);
@@ -45,13 +49,13 @@ void Menu::CapNhat(RenderWindow* window)
 		this->luachon += 1;
 	}
 	//Nếu lựa chọn >1 hoặc <1 trả về 0
-	if (this->luachon > 2)
+	if (this->luachon > 3)
 	{
 		this->luachon = 0;
 	}
 	if (this->luachon < 0)
 	{
-		this->luachon = 2;
+		this->luachon = 3;
 	}
 	//Bấm Enter để lựa chọn
 	if (Keyboard::isKeyPressed(Keyboard::Key::Enter))
@@ -65,6 +69,9 @@ void Menu::CapNhat(RenderWindow* window)
 			coreState.SetTrangThai(new mainGame_Brick()); 
 			break; 
 		case 2:
+			coreState.SetTrangThai(new HighScoreScreen()); 
+			break; 
+		case 3:
 			quitGame = true;
 			break;
 		}
@@ -83,21 +90,31 @@ void Menu::Xuat(sf::RenderWindow* window)
 		this->choi->setFillColor(Color::Green);
 		this->choi2->setFillColor(Color::White);
 		this->thoat->setFillColor(Color::White); 
+		this->highscore_menu->setFillColor(Color::White); 
 		break;
 	case 1: 
 		this->choi2->setFillColor(Color::Green); 
 		this->thoat->setFillColor(Color::White);
 		this->choi->setFillColor(Color::White);
+		this->highscore_menu->setFillColor(Color::White);
 		break; 
-	case 2:
+	case 2: 
+		this->highscore_menu->setFillColor(Color::Green); 
+		this->choi->setFillColor(Color::White);  
+		this->choi2->setFillColor(Color::White);
+		this->thoat->setFillColor(Color::White);
+		break; 
+		
+	case 3:
 		this->choi->setFillColor(Color::White);
 		this->choi2->setFillColor(Color::White);
 		this->thoat->setFillColor(Color::Green);
-		break;
+		this->highscore_menu->setFillColor(Color::White); 
 	}
 	window->draw(*this->tengame);
 	window->draw(*this->choi);
 	window->draw(*this->choi2);
+	window->draw(*this->highscore_menu);
 	window->draw(*this->thoat);
 	window->draw(*this->madeby);
 }
