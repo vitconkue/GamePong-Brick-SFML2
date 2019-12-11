@@ -167,7 +167,7 @@ void mainGame_Brick::Destroy(RenderWindow* window)
 
 void mainGame_Brick::LoadBrick()
 {
-	for (int i = 1; i < 6; i++)
+	for (int i = 1; i < 8; i++)
 	{
 		for (int j = 1; j < 4; j++)
 		{
@@ -176,8 +176,51 @@ void mainGame_Brick::LoadBrick()
 			brickSize.y = 30;
 			Brick_BrickGame* b = new Brick_BrickGame;
 			b->setShieldNumber(3);
-			b->setPosition(i * 200, j * 200);
+			b->setPosition(i * 150, j * 200);
 			b->setOrigin(brickSize / 2.f);
+			switch (i)
+			{
+			case 1:
+			{
+				b->setBrickColor('b');
+				break;
+			}
+			case 2:
+			{
+				b->setBrickColor('g');
+				break;
+			}
+
+			case 3:
+			{
+				b->setBrickColor('o');
+				break;
+			}
+
+			case 4:
+			{
+				b->setBrickColor('r');
+				break;
+			}
+			case 5:
+			{
+				b->setBrickColor('v');
+				break;
+			}
+
+			case 6:
+			{
+				b->setBrickColor('y');
+				break;
+			}
+
+			case 7:
+			{
+				b->setBrickColor('m');
+				b->setShieldNumber(4);
+				break;
+			}
+			}
 			b->TaoTexture();
 			brick.push_back(b);
 		}

@@ -8,12 +8,14 @@ class Brick_BrickGame: public VatThe
 {
 protected:
 	int Shield;
-	string BrickColor;
+	char BrickColor;
 public:
 	int getShieldNumber();
 	void setShieldNumber(int number);
 	Brick_BrickGame();
 	void CapNhat(Ball_BrickGame*& m_ball, DiemSo*& point);
 	void TaoTexture();
+	char getBrickColor();
+	void setBrickColor(char a);
 };
 
