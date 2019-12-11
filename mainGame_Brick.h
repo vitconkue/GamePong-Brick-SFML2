@@ -6,6 +6,7 @@
 #include "Menu.h"
 #include"Brick_BrickGame.h"
 #include "Brick_Prize.h"
+#include <fstream>
 class mainGame_Brick : public TrangThai
 {
 public: 
@@ -13,6 +14,7 @@ public:
 	void CapNhat(RenderWindow* window);
 	void Xuat(RenderWindow* window);
 	void Destroy(RenderWindow* window);
+	void InputName(); 
 	void LoadBrick();
 private: 
 	vector<Brick_BrickGame*> brick;

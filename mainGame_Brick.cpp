@@ -46,7 +46,7 @@ void mainGame_Brick::CapNhat(RenderWindow* window)
 	}
 	else if (brick.empty()) endGame = true; 
 	else {
-		ball->CapNhat(window, point);
+		ball->CapNhat(window, point, player);
 		player->CapNhat(window);
 		//Cap Nhap Brick
 		for (int i = 0; i < brick.size(); i++)
@@ -133,6 +133,7 @@ void mainGame_Brick::Xuat(RenderWindow* window)
 		if (ball->getLive() == 0) // truong hop thua
 		{
 			window->draw(*lose);
+			InputName(); 
 			if (Keyboard::isKeyPressed(Keyboard::Key::Enter))
 			{
 				coreState.SetTrangThai(new mainGame_Brick());
@@ -145,6 +146,7 @@ void mainGame_Brick::Xuat(RenderWindow* window)
 		else // truong hop thang
 		{
 			window->draw(*win);
+			InputName(); 
 			if (Keyboard::isKeyPressed(Keyboard::Key::Enter))
 			{
 				coreState.SetTrangThai(new mainGame_Brick());
@@ -165,9 +167,30 @@ void mainGame_Brick::Destroy(RenderWindow* window)
 	delete font; 
 }
 
+void mainGame_Brick::InputName()
+{
+	std::string nm;
+	cout << "Player Name: ";
+	getline(cin, nm);
+	fstream f;
+	int currentNum;
+	f.open("Highscores.txt", ios::in);
+	f >> currentNum;
+	f.close();
+	currentNum = currentNum + 1;
+	f.close();
+	f.open("Highscores.txt", ios::in | ios::out);
+	f << currentNum;
+	f.close();
+	fstream fout;
+	fout.open("Highscores.txt", fstream::app);
+	fout << nm << ":" << point->GetDiem() << endl;
+	fout.close();
+}
+
 void mainGame_Brick::LoadBrick()
 {
-	for (int i = 1; i < 6; i++)
+	for (int i = 1; i < 8; i++)
 	{
 		for (int j = 1; j < 4; j++)
 		{
@@ -176,8 +199,51 @@ void mainGame_Brick::LoadBrick()
 			brickSize.y = 30;
 			Brick_BrickGame* b = new Brick_BrickGame;
 			b->setShieldNumber(3);
-			b->setPosition(i * 200, j * 200);
+			b->setPosition(i * 150, j * 200);
 			b->setOrigin(brickSize / 2.f);
+			switch (i)
+			{
+			case 1:
+			{
+				b->setBrickColor('b');
+				break;
+			}
+			case 2:
+			{
+				b->setBrickColor('g');
+				break;
+			}
+
+			case 3:
+			{
+				b->setBrickColor('o');
+				break;
+			}
+
+			case 4:
+			{
+				b->setBrickColor('r');
+				break;
+			}
+			case 5:
+			{
+				b->setBrickColor('v');
+				break;
+			}
+
+			case 6:
+			{
+				b->setBrickColor('y');
+				break;
+			}
+
+			case 7:
+			{
+				b->setBrickColor('m');
+				b->setShieldNumber(4);
+				break;
+			}
+			}
 			b->TaoTexture();
 			brick.push_back(b);
 		}

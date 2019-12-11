@@ -21,7 +21,6 @@ void mainGame::KhoiTao(RenderWindow* window)
 	this->win2 = new Text("Nguoi choi 2 thang!\nNhan Enter de choi lai!\nNhan Esc de thoat!", *font, 64U);
 	this->win2->setOrigin(this->win2->getGlobalBounds().width / 2, this->win2->getGlobalBounds().height / 2);
 	this->win2->setPosition(window->getSize().x / 2, window->getSize().y / 2);
-
 	this->diem2->setPosition(800, 0);
 	//Khởi tạo các biến 
 	this->player1 = new ThanhNguoiChoi(0);
@@ -29,7 +28,6 @@ void mainGame::KhoiTao(RenderWindow* window)
 	this->bong = new Bong(this->diem1, this->diem2, this->player1, this->player2);
 
 	this->bong->Reset(window);
-
 	this->paused = false;
 	this->enterKey = false;
 	this->endgame = false;
