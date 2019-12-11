@@ -1,6 +1,7 @@
 #pragma once
 #include "TrangThaiGame.h"
 #include "mainGame_Brick.h"
+#include "HighScoreScreen.h"
 using namespace sf;
 class Menu : public TrangThai
 {
@@ -14,6 +15,7 @@ private:
 	Text* tengame;
 	Text* choi;
 	Text* choi2; 
+	Text* highscore_menu; 
 	Text* thoat;
 	Text* madeby;
 

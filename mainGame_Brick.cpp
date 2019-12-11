@@ -133,6 +133,7 @@ void mainGame_Brick::Xuat(RenderWindow* window)
 		if (ball->getLive() == 0) // truong hop thua
 		{
 			window->draw(*lose);
+			InputName(); 
 			if (Keyboard::isKeyPressed(Keyboard::Key::Enter))
 			{
 				coreState.SetTrangThai(new mainGame_Brick());
@@ -145,6 +146,7 @@ void mainGame_Brick::Xuat(RenderWindow* window)
 		else // truong hop thang
 		{
 			window->draw(*win);
+			InputName(); 
 			if (Keyboard::isKeyPressed(Keyboard::Key::Enter))
 			{
 				coreState.SetTrangThai(new mainGame_Brick());
@@ -163,6 +165,27 @@ void mainGame_Brick::Destroy(RenderWindow* window)
 	delete player; 
 	delete ball; 
 	delete font; 
+}
+
+void mainGame_Brick::InputName()
+{
+	std::string nm;
+	cout << "Player Name: ";
+	getline(cin, nm);
+	fstream f;
+	int currentNum;
+	f.open("Highscores.txt", ios::in);
+	f >> currentNum;
+	f.close();
+	currentNum = currentNum + 1;
+	f.close();
+	f.open("Highscores.txt", ios::in | ios::out);
+	f << currentNum;
+	f.close();
+	fstream fout;
+	fout.open("Highscores.txt", fstream::app);
+	fout << nm << ":" << point->GetDiem() << endl;
+	fout.close();
 }
 
 void mainGame_Brick::LoadBrick()
