@@ -140,6 +140,7 @@
     <ClCompile Include="Brick_BrickGame.cpp" />
     <ClCompile Include="Brick_Prize.cpp" />
     <ClCompile Include="DiemSo.cpp" />
+    <ClCompile Include="HighScoreScreen.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainGame.cpp" />
     <ClCompile Include="mainGame_Brick.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="Brick_BrickGame.h" />
     <ClInclude Include="Brick_Prize.h" />
     <ClInclude Include="DiemSo.h" />
+    <ClInclude Include="HighScoreScreen.h" />
     <ClInclude Include="mainGame.h" />
     <ClInclude Include="mainGame_Brick.h" />
     <ClInclude Include="Menu.h" />
