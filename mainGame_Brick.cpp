@@ -9,15 +9,15 @@ void mainGame_Brick::KhoiTao(RenderWindow* window)
 	point = new DiemSo(*font, 64U);
 	ball = new Ball_BrickGame(point, player); 
 	ball->reset(window); 
-	this->pausedText = new Text("Tam dung. Nhan P de tiep tuc.\nNhan Esc de thoat.", *font, 64U);
+	this->pausedText = new Text("Paused. Press P to continue.\nPress Esc to exit.", *font, 64U);
 	this->pausedText->setOrigin(this->pausedText->getGlobalBounds().width / 2, this->pausedText->getGlobalBounds().height / 2);
 	this->pausedText->setPosition(window->getSize().x / 2, window->getSize().y / 2);
-	//Chữ khi người 1 thắng
-	this->win = new Text("Thang!\nNhan Enter de choi lai!\nNhan Esc de thoat!", *font, 64U);
+	//Chữ khi thắng
+	this->win = new Text("Win!\nPress Enter to paly again!\nPress Esc to exit!", *font, 64U);
 	this->win->setOrigin(this->win->getGlobalBounds().width / 2, this->win->getGlobalBounds().height / 2);
 	this->win->setPosition(window->getSize().x / 2, window->getSize().y / 2);
-	//Chữ khi người 2 thắng
-	this->lose = new Text("Thua!\nNhan Enter de choi lai!\nNhan Esc de thoat!", *font, 64U);
+	//Chữ khi thua
+	this->lose = new Text("Lose!\nPress Enter to paly again!\nPress Esc to exit!", *font, 64U);
 	this->lose->setOrigin(this->lose->getGlobalBounds().width / 2, this->lose->getGlobalBounds().height / 2);
 	this->lose->setPosition(window->getSize().x / 2, window->getSize().y / 2);
 	this->paused = false;
@@ -25,6 +25,13 @@ void mainGame_Brick::KhoiTao(RenderWindow* window)
 	this->endGame = false;
 	Effect = 1;
 	LoadBrick("BrickLevel/level1.txt");
+	for (int i = 1; i <= 4; i++)
+	{
+		Heart_BrickGame* newHeart; 
+		newHeart = new Heart_BrickGame(); 
+		newHeart->setPosition((float)(i-1) * 40, 100); 
+		hearts.push_back(newHeart);
+	}
 }
 
 void mainGame_Brick::CapNhat(RenderWindow* window)
@@ -46,7 +53,8 @@ void mainGame_Brick::CapNhat(RenderWindow* window)
 	}
 	else if (brick.empty()) endGame = true; 
 	else {
-		ball->CapNhat(window, point, player);
+		//ball->CapNhat(window, point, player);
+		ball->CapNhat(window, point, player, hearts);
 		player->CapNhat(window);
 		//Cap Nhap Brick
 		for (int i = 0; i < brick.size(); i++)
@@ -115,6 +123,10 @@ void mainGame_Brick::Xuat(RenderWindow* window)
 	window->draw(*ball); 
 	window->draw(*player); 
 	window->draw(*point); 
+	for (int i = 0; i < hearts.size(); i++)
+	{
+		window->draw(*hearts[i]); 
+	}
 	for (int i = 0; i < brick.size(); i++)
 	{
 		window->draw(*brick[i]);

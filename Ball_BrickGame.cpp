@@ -14,7 +14,7 @@ Ball_BrickGame::Ball_BrickGame(DiemSo* d, Thanh* p)
 	this->setOrigin(Vector2f(getTexture()->getSize().x * 0.5, getTexture()->getSize().y * 0.5));
 }
 
-void Ball_BrickGame::CapNhat(sf::RenderWindow* window, DiemSo*& point, ThanhNguoiChoi_Brick* player)
+void Ball_BrickGame::CapNhat(sf::RenderWindow* window, DiemSo*& point, ThanhNguoiChoi_Brick* player, vector<Heart_BrickGame*>& hearts)
 {
 	// kiem tra va cham voi thanh
 	sf::Vector2u playerSize = Vector2u(player->getGlobalBounds().width, player->getGlobalBounds().height); 
@@ -43,7 +43,8 @@ void Ball_BrickGame::CapNhat(sf::RenderWindow* window, DiemSo*& point, ThanhNguo
 	if (getPosition().y > player->getPosition().y - player->getGlobalBounds().height / 2 + 2)
 	{
 		lives--;
-		reset(window); 
+		reset(window);  
+		hearts.resize(lives); 
 	}
 	// tuong trai phai
 	if (getPosition().x < 0 || getPosition().x + getGlobalBounds().width >= window->getSize().x)
@@ -61,7 +62,7 @@ void Ball_BrickGame::reset(sf::RenderWindow* window)
 	this->VanToc.y = -1.2; 
 	player->setPosition(window->getSize().x / 2, window->getSize().y - 20); 
 	this->setPosition(window->getSize().x / 2, window->getSize().y - 60); 
-	
+	player->setScale(1.0, 1.0); 
 }
 
 void Ball_BrickGame::setPlayer(Thanh* _player)

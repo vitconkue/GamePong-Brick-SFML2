@@ -15,19 +15,19 @@ void Menu::KhoiTao(RenderWindow* window)
 	this->tengame->setOrigin(this->tengame->getGlobalBounds().width / 2, this->tengame->getGlobalBounds().height / 2);
 	this->tengame->setPosition(window->getSize().x / 2, window->getSize().y / 8);
 	//Nút bắt đầu
-	this->choi = new Text("Bat dau Pong", *this->font, 90U);
+	this->choi = new Text("Start Pong", *this->font, 90U);
 	this->choi->setOrigin(this->choi->getGlobalBounds().width / 2, this->choi->getGlobalBounds().height / 2);
 	this->choi->setPosition(window->getSize().x / 2, window->getSize().y / 3);
 	// Nút bắt đầu chế độ brick
-	this->choi2 = new Text("Bat dau Brick", *font, 90U);
+	this->choi2 = new Text("Start Brick", *font, 90U);
 	this->choi2->setOrigin(choi2->getGlobalBounds().width / 2, choi2->getGlobalBounds().height / 2); 
 	this->choi2->setPosition(window->getSize().x / 2, window->getSize().y / 3 + 60); 
 	// Nút vào highscore
-	this->highscore_menu = new Text("Diem cao ", *font, 90U);
+	this->highscore_menu = new Text("High Scores", *font, 90U);
 	this->highscore_menu->setOrigin(highscore_menu->getGlobalBounds().width / 2, highscore_menu->getGlobalBounds().height / 2);
 	this->highscore_menu->setPosition(window->getSize().x / 2, window->getSize().y / 3 + 120); 
 	//Nút thoát
-	this->thoat = new Text("Thoat", *this->font, 128U);
+	this->thoat = new Text("Quit Game", *this->font, 128U);
 	this->thoat->setOrigin(this->thoat->getGlobalBounds().width / 2, this->thoat->getGlobalBounds().height / 2);
 	this->thoat->setPosition(window->getSize().x / 2, window->getSize().y / 3 + this->choi->getGlobalBounds().height + 150);
 

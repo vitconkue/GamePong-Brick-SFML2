@@ -5,8 +5,11 @@
 #include "Ball_BrickGame.h"
 #include "Menu.h"
 #include"Brick_BrickGame.h"
+#include "Heart_BrickGame.h"
 #include "Brick_Prize.h"
+
 #include <fstream>
+
 class mainGame_Brick : public TrangThai
 {
 public: 
@@ -18,8 +21,9 @@ public:
 	void InputName2(RenderWindow* window);
 	void LoadBrick(string filename);
 private: 
+	vector<Heart_BrickGame*> hearts;
 	vector<Brick_BrickGame*> brick;
-	vector<Brick_Prize*> prize; 
+	vector<Brick_Prize*> prize;  
 	ThanhNguoiChoi_Brick* player; 
 	Ball_BrickGame* ball; 
 	DiemSo* point; 
