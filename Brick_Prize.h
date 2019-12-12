@@ -1,7 +1,6 @@
 #pragma once
 #include "VatThe.h"
-#include <cstdlib>
-#include <ctime>
+#include "SupportFunction.h"
 #include "Ball_BrickGame.h"
 #include "Brick_BrickGame.h"
 #include "ThanhNguoiChoi_Brick.h"
@@ -13,6 +12,7 @@ protected:
 	// type 2: giam nua so diem
 	// type 3: tang 1.4 lan chieu dau thanh
 	// type 4: giam 1.4 lan chieu dai thanh
+	// type 5: tang so mang hien co
 	bool touched_player; 
 	bool touched_floor; 
 public :

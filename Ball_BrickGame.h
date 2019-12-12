@@ -20,6 +20,7 @@ public:
 	void reset(sf::RenderWindow* window); 
 	void setPlayer(Thanh* _player); 
 	int getLive() { return lives; }
+	void  increaseLive() { lives += 1;  }
 	~Ball_BrickGame(); 
 
 };

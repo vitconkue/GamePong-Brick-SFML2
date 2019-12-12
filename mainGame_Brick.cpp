@@ -13,11 +13,11 @@ void mainGame_Brick::KhoiTao(RenderWindow* window)
 	this->pausedText->setOrigin(this->pausedText->getGlobalBounds().width / 2, this->pausedText->getGlobalBounds().height / 2);
 	this->pausedText->setPosition(window->getSize().x / 2, window->getSize().y / 2);
 	//Chữ khi thắng
-	this->win = new Text("Win!\nPress Enter to paly again!\nPress Esc to exit!", *font, 64U);
+	this->win = new Text("Win!\nPress A to play again!\nPress Esc to exit!", *font, 64U);
 	this->win->setOrigin(this->win->getGlobalBounds().width / 2, this->win->getGlobalBounds().height / 2);
 	this->win->setPosition(window->getSize().x / 2, window->getSize().y / 2);
 	//Chữ khi thua
-	this->lose = new Text("Lose!\nPress Enter to paly again!\nPress Esc to exit!", *font, 64U);
+	this->lose = new Text("Lose!\nPress A to paly again!\nPress Esc to exit!", *font, 64U);
 	this->lose->setOrigin(this->lose->getGlobalBounds().width / 2, this->lose->getGlobalBounds().height / 2);
 	this->lose->setPosition(window->getSize().x / 2, window->getSize().y / 2);
 	this->paused = false;
@@ -25,7 +25,7 @@ void mainGame_Brick::KhoiTao(RenderWindow* window)
 	this->endGame = false;
 	Effect = 1;
 	LoadBrick("BrickLevel/level1.txt");
-	for (int i = 1; i <= 4; i++)
+	for (int i = 1; i <= 6; i++)
 	{
 		Heart_BrickGame* newHeart; 
 		newHeart = new Heart_BrickGame(); 
@@ -73,12 +73,17 @@ void mainGame_Brick::CapNhat(RenderWindow* window)
 		}
 		for (int i = 0; i < brick.size(); i++)
 		{
+
 			if (brick[i]->getShieldNumber() == 0)
 			{
-				Brick_Prize* newPrize = new Brick_Prize; 
-				newPrize->TaoTexture(); 
-				newPrize->setPosition(brick[i]->getPosition()); 
-				prize.push_back(newPrize);
+				int p_factor = randomNumber(1, 2); 
+				if (p_factor == 1)
+				{
+					Brick_Prize* newPrize = new Brick_Prize;
+					newPrize->TaoTexture();
+					newPrize->setPosition(brick[i]->getPosition());
+					prize.push_back(newPrize);
+				}
 				brick.erase(brick.begin() + i);
 			}
 		}
@@ -133,7 +138,7 @@ void mainGame_Brick::Xuat(RenderWindow* window)
 	window->draw(*ball); 
 	window->draw(*player); 
 	window->draw(*point); 
-	for (int i = 0; i < hearts.size(); i++)
+	for (int i = 0; i < ball->getLive(); i++)
 	{
 		window->draw(*hearts[i]); 
 	}
@@ -155,28 +160,28 @@ void mainGame_Brick::Xuat(RenderWindow* window)
 		if (ball->getLive() == 0) // truong hop thua
 		{ 
 			window->draw(*lose);
-			if (Keyboard::isKeyPressed(Keyboard::Key::Enter))
+			if (Keyboard::isKeyPressed(Keyboard::Key::A))
 			{
-				InputName2(window);
+				InputName(window);
 				coreState.SetTrangThai(new mainGame_Brick());
 			}
 			else if (Keyboard::isKeyPressed(Keyboard::Key::Escape))
 			{
-				InputName2(window);
+				InputName(window);
 				coreState.SetTrangThai(new Menu());
 			}
 		}
 		else // truong hop thang
 		{
 			window->draw(*win);
-			if (Keyboard::isKeyPressed(Keyboard::Key::Enter))
+			if (Keyboard::isKeyPressed(Keyboard::Key::A))
 			{
-				//InputName2(window);
+				InputName(window);
 				coreState.SetTrangThai(new mainGame_Brick());
 			}
 			else if (Keyboard::isKeyPressed(Keyboard::Key::Escape))
 			{
-				InputName2(window);
+				InputName(window);
 				coreState.SetTrangThai(new Menu());
             }
 		}
@@ -191,28 +196,7 @@ void mainGame_Brick::Destroy(RenderWindow* window)
 	delete font; 
 }
 
-void mainGame_Brick::InputName()
-{
-	std::string nm;
-	cout << "Player Name: ";
-	getline(cin, nm);
-	fstream f;
-	int currentNum;
-	f.open("Highscores.txt", ios::in);
-	f >> currentNum;
-	f.close();
-	currentNum = currentNum + 1;
-	f.close();
-	f.open("Highscores.txt", ios::in | ios::out);
-	f << currentNum;
-	f.close();
-	fstream fout;
-	fout.open("Highscores.txt", fstream::app);
-	fout << nm << ":" << point->GetDiem() << endl;
-	fout.close();
-}
-
-void mainGame_Brick::InputName2(RenderWindow* window)
+void mainGame_Brick::InputName(RenderWindow* window)
 {
 	string playerName=""; 
 	string temp = "Enter Yourname: ";
@@ -338,6 +322,7 @@ void mainGame_Brick::SaveGame(string filename)
 	f << point->GetDiem() <<endl;
 	//Lưu số mạng còn lại
 	f << hearts.size();
+	f.close();
 }
 
 //Hàm load game
@@ -410,4 +395,5 @@ void mainGame_Brick::LoadGame(string filename)
 		newHearts.push_back(newHeart);
 	}
 	hearts = newHearts;
+	f.close();
 }

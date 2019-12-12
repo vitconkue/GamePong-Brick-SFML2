@@ -1,14 +1,36 @@
-#include "Brick_Prize.h"
+﻿#include "Brick_Prize.h"
 
 Brick_Prize::Brick_Prize()
 {
-	srand(time(0)); 
-	int k = rand(); 
-	k = k % 4;
-	type = k + 1; 
-	cout << "Type: " << type << endl; 
-	VanToc.x = 0.f; 
-	VanToc.y = 1.5f;
+	type = randomNumber(1, 5); 
+	switch (type)
+	{
+	case 1 :
+		cout << "Prize x2 score created. " << endl; 
+		break;
+	case 2 : 
+		cout << "Prize /2 score created. " << endl; 
+		break; 
+	case 3: 
+		cout << "Prize x2 paddle length created. " << endl; 
+		break; 
+	case 4: 
+		cout << "Prize /2 paddle length created. " << endl; 
+		break; 
+	case 5: 
+		cout << "Prize increase lives created. " << endl; 
+		break;
+	}
+	if (type == 5) // cho tim rơi xuống nhanh hơn
+	{
+		VanToc.x = 0.f; 
+		VanToc.y = 1.6f;
+	}
+	else
+	{
+		VanToc.x = 0.f;
+		VanToc.y = 1.3f;
+	}
 	touched_player = false; 
 	touched_floor = false;
 }
@@ -21,19 +43,29 @@ void Brick_Prize::CapNhat(ThanhNguoiChoi_Brick*& player, DiemSo*& point, Ball_Br
 		touched_player = true;
 		switch (type)
 		{
-		case 1:
+		case 1: // tăng điểm
 			point->setDiem(point->GetDiem() * 2);
 			break; 
-		case 2: 
+		case 2: // giảm điểm
 			point->setDiem(point->GetDiem() / 2); 
 			break; 
-		case 3: 
-			player->setScale(player->getScale().x * 2, 1.0); 
-			_ball->setPlayer(player); 
+		case 3: // tăng chiều dài thanh
+			if (player->getScale().x <= 2.f) // giới hạn không cho thanh to vượt mức
+			{
+				player->setScale(player->getScale().x * 2, 1.0); // tăng chiều dài hoành độ 2 lần
+				_ball->setPlayer(player);
+			}
 			break; 
-		case 4: 
-			player->setScale(player->getScale().x / 2, 1.0);
+		case 4: // giảm chiều dài thanh
+			if(player->getScale().x >= 0.5f)  // giới hạn không cho thanh nhỏ vượt mức
+			player->setScale(player->getScale().x / 2, 1.0); // giảm chiều dài hoành độ 2 lần
 			_ball->setPlayer(player);
+			break; 
+		case 5:
+			if (_ball->getLive() < 6) // tối đa 6 mạng
+			{
+				_ball->increaseLive(); // tăng số mạng hiện có
+			}
 			break; 
 		}
 	}
@@ -59,6 +91,9 @@ void Brick_Prize::TaoTexture()
 		break; 
 	case 4 : 
 		Load("objectDecreaseLength.png"); 
+		break; 
+	case 5: 
+		Load("Heart.png"); 
 		break; 
 	}
 }

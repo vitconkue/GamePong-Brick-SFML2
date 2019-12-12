@@ -7,7 +7,7 @@
 #include"Brick_BrickGame.h"
 #include "Heart_BrickGame.h"
 #include "Brick_Prize.h"
-
+#include "SupportFunction.h"
 #include <fstream>
 
 class mainGame_Brick : public TrangThai
@@ -17,8 +17,7 @@ public:
 	void CapNhat(RenderWindow* window);
 	void Xuat(RenderWindow* window);
 	void Destroy(RenderWindow* window);
-	void InputName(); 
-	void InputName2(RenderWindow* window);
+	void InputName(RenderWindow* window);
 	void LoadBrick(string filename);
 	void SaveGame(string filename);
 	void LoadGame(string filename);

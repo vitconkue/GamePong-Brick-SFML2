@@ -1,4 +1,4 @@
-10
+13
 TestPlayer1:120
 An:483
 TestPlayer2:278
@@ -9,3 +9,5 @@ Minh:444
 Test:875
 an:200
 urh:250
+linh:400
+test34:200

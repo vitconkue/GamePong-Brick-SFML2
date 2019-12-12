@@ -20,9 +20,9 @@ void HighScoreScreen::KhoiTao(RenderWindow* window)
 		getline(fin, nm, ':'); 
 		fin >> d; 
 		fin.get();
-		Text* tmpName = new Text(nm, *font, 30U);
+		Text* tmpName = new Text(nm, *font, 40U);
 		names.push_back(tmpName); 
-		DiemSo* tmpPoint = new DiemSo(*font, 30U); 
+		DiemSo* tmpPoint = new DiemSo(*font, 40U); 
 		tmpPoint->setDiem(d); 
 		highscores.push_back(tmpPoint);
 	}
@@ -40,7 +40,8 @@ void HighScoreScreen::KhoiTao(RenderWindow* window)
 
 void HighScoreScreen::CapNhat(RenderWindow* window)
 {
-	if (Keyboard::isKeyPressed(Keyboard::Escape))
+	if (Keyboard::isKeyPressed(Keyboard::Escape) || 
+		Keyboard::isKeyPressed(Keyboard::Enter))
 	{
 		coreState.SetTrangThai(new Menu()); 
 	}
@@ -69,6 +70,7 @@ void HighScoreScreen::Destroy(RenderWindow* window)
 
 void HighScoreScreen::Sort()
 {
+	// interchange sort
 	int len = highscores.size(); 
 	for (int i = 0; i < len-1; i++)
 	{

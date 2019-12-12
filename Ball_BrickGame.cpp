@@ -43,8 +43,7 @@ void Ball_BrickGame::CapNhat(sf::RenderWindow* window, DiemSo*& point, ThanhNguo
 	if (getPosition().y > player->getPosition().y - player->getGlobalBounds().height / 2 + 2)
 	{
 		lives--;
-		reset(window);  
-		hearts.resize(lives); 
+		reset(window);   
 	}
 	// tuong trai phai
 	if (getPosition().x < 0 || getPosition().x + getGlobalBounds().width >= window->getSize().x)
