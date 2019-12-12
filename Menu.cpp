@@ -87,28 +87,28 @@ void Menu::Xuat(sf::RenderWindow* window)
 	{
 	case 0:
 		this->choi->setFillColor(Color::Blue);
-		this->choi2->setFillColor(Color::Black);
-		this->thoat->setFillColor(Color::Black); 
-		this->highscore_menu->setFillColor(Color::Black);
+		this->choi2->setFillColor(Color::White);
+		this->thoat->setFillColor(Color::White); 
+		this->highscore_menu->setFillColor(Color::White);
 		break;
 	case 1: 
 		this->choi2->setFillColor(Color::Blue); 
-		this->thoat->setFillColor(Color::Black);
-		this->choi->setFillColor(Color::Black);
-		this->highscore_menu->setFillColor(Color::Black);
+		this->thoat->setFillColor(Color::White);
+		this->choi->setFillColor(Color::White);
+		this->highscore_menu->setFillColor(Color::White);
 		break; 
 	case 2: 
 		this->highscore_menu->setFillColor(Color::Blue); 
-		this->choi->setFillColor(Color::Black);
-		this->choi2->setFillColor(Color::Black);
-		this->thoat->setFillColor(Color::Black);
+		this->choi->setFillColor(Color::White);
+		this->choi2->setFillColor(Color::White);
+		this->thoat->setFillColor(Color::White);
 		break; 
 		
 	case 3:
-		this->choi->setFillColor(Color::Black);
-		this->choi2->setFillColor(Color::Black);
+		this->choi->setFillColor(Color::White);
+		this->choi2->setFillColor(Color::White);
 		this->thoat->setFillColor(Color::Red);
-		this->highscore_menu->setFillColor(Color::Black);
+		this->highscore_menu->setFillColor(Color::White);
 	}
 	//Xuất background
 	Sprite sp(background);
