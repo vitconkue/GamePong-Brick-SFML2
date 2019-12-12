@@ -30,6 +30,8 @@ void Menu::KhoiTao(RenderWindow* window)
 	this->thoat = new Text("Quit Game", *this->font, 128U);
 	this->thoat->setOrigin(this->thoat->getGlobalBounds().width / 2, this->thoat->getGlobalBounds().height / 2);
 	this->thoat->setPosition(window->getSize().x / 2, window->getSize().y / 3 + this->choi->getGlobalBounds().height + 240);
+	//background
+	background.loadFromFile("Graphics/sprites/MainMenuBackground.png");
 }
 //Hàm cập nhật Menu
 void Menu::CapNhat(RenderWindow* window)
@@ -78,35 +80,39 @@ void Menu::CapNhat(RenderWindow* window)
 //Hàm xuất ra Menu
 void Menu::Xuat(sf::RenderWindow* window)
 {
-	this->choi->setFillColor(Color::White);
-	this->thoat->setFillColor(Color::White);
+
+	this->choi->setFillColor(Color::Black);
+	this->thoat->setFillColor(Color::Black);
 	switch (this->luachon)
 	{
 	case 0:
-		this->choi->setFillColor(Color::Green);
-		this->choi2->setFillColor(Color::White);
-		this->thoat->setFillColor(Color::White); 
-		this->highscore_menu->setFillColor(Color::White); 
+		this->choi->setFillColor(Color::Blue);
+		this->choi2->setFillColor(Color::Black);
+		this->thoat->setFillColor(Color::Black); 
+		this->highscore_menu->setFillColor(Color::Black);
 		break;
 	case 1: 
-		this->choi2->setFillColor(Color::Green); 
-		this->thoat->setFillColor(Color::White);
-		this->choi->setFillColor(Color::White);
-		this->highscore_menu->setFillColor(Color::White);
+		this->choi2->setFillColor(Color::Blue); 
+		this->thoat->setFillColor(Color::Black);
+		this->choi->setFillColor(Color::Black);
+		this->highscore_menu->setFillColor(Color::Black);
 		break; 
 	case 2: 
-		this->highscore_menu->setFillColor(Color::Green); 
-		this->choi->setFillColor(Color::White);  
-		this->choi2->setFillColor(Color::White);
-		this->thoat->setFillColor(Color::White);
+		this->highscore_menu->setFillColor(Color::Blue); 
+		this->choi->setFillColor(Color::Black);
+		this->choi2->setFillColor(Color::Black);
+		this->thoat->setFillColor(Color::Black);
 		break; 
 		
 	case 3:
-		this->choi->setFillColor(Color::White);
-		this->choi2->setFillColor(Color::White);
+		this->choi->setFillColor(Color::Black);
+		this->choi2->setFillColor(Color::Black);
 		this->thoat->setFillColor(Color::Red);
-		this->highscore_menu->setFillColor(Color::White); 
+		this->highscore_menu->setFillColor(Color::Black);
 	}
+	//Xuất background
+	Sprite sp(background);
+	window->draw(sp);
 	window->draw(*this->tengame);
 	window->draw(*this->choi);
 	window->draw(*this->choi2);

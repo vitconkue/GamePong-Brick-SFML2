@@ -19,6 +19,7 @@ public:
 	void CapNhat(sf::RenderWindow* window, DiemSo*& point, ThanhNguoiChoi_Brick* player, vector<Heart_BrickGame*> &hearts); // cập nhật các yếu tố liên quan
 	void reset(sf::RenderWindow* window); // reset(khi không đỡ được thanh) 
 	void setPlayer(Thanh* _player);  // setter player
+	void setLive(int a) { lives = a; }//set Live
 	int getLive() { return lives; } // getter lấy số mạng còn lại hiện tại
 	void  increaseLive() { lives += 1;  } // tăng mạng (khi ăn vật phẩm) 
 	~Ball_BrickGame(); 

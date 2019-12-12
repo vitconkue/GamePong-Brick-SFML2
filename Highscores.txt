@@ -1,4 +1,4 @@
-13
+15
 TestPlayer1:120
 An:483
 TestPlayer2:278
@@ -12,3 +12,5 @@ urh:250
 linh:400
 test34:200
 Superman:1750
+dang khoa:200
+Dangkhoa:6250

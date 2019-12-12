@@ -19,5 +19,6 @@ private:
 	Text* thoat;
 	int luachon;
     bool upKey, downKey;
+	Texture background;
 };
 

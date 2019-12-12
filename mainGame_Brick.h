@@ -22,6 +22,7 @@ public:
 	void LoadBrick(string filename); // Load vị trí, màu gạch từ file
 	void SaveGame(string filename); // lưu game
 	void LoadGame(string filename); // load game
+	int PauseGame(RenderWindow* window);//pause game
 private: 
 	vector<Heart_BrickGame*> hearts; // vector mạng
 	vector<Brick_BrickGame*> brick; // vector chứa các viên gạch
@@ -36,5 +37,6 @@ private:
 	int Effect;
 	bool paused, enterKey; 
 	bool endGame; 
+	Texture background;
 };
 

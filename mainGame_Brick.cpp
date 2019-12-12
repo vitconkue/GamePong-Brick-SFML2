@@ -33,29 +33,24 @@ void mainGame_Brick::KhoiTao(RenderWindow* window)
 		newHeart->setPosition((float)(i-1) * 40, 80); 
 		hearts.push_back(newHeart);
 	}
+	background.loadFromFile("Graphics/sprites/InGameBackground.png");
 }
 // cập nhật tất cả yếu tố liên quan trò chơi
 void mainGame_Brick::CapNhat(RenderWindow* window)
 {
 	if (paused)
 	{
-		if (Keyboard::isKeyPressed(Keyboard::Key::P) && !enterKey)
-		{
-			paused = false;
-		}
-		if (Keyboard::isKeyPressed(Keyboard::Key::S))
+		int choose = PauseGame(window);
+	if (choose==2)
 		{
 			SaveGame("Save/1.txt");
 			paused = false;
 		}
-		if (Keyboard::isKeyPressed(Keyboard::Key::L))
+		if (choose==3)
 		{
+			KhoiTao(window);
 			LoadGame("Save/1.txt");
 			paused = false;
-		}
-		if (Keyboard::isKeyPressed(Keyboard::Key::Escape))
-		{
-			coreState.SetTrangThai(new Menu());
 		}
 	}
 	else if (ball->getLive() == 0) // hết mạng => thua, kết thúc game
@@ -141,6 +136,9 @@ void mainGame_Brick::CapNhat(RenderWindow* window)
 // Xuất ra màn hình 
 void mainGame_Brick::Xuat(RenderWindow* window)
 {
+	//vẽ background
+	Sprite sp(background);
+	window->draw(sp);
 	// vẽ tất cả các thành phần game
 	window->draw(*ball); 
 	window->draw(*player); 
@@ -222,7 +220,7 @@ void mainGame_Brick::InputName(RenderWindow* window)
 		{
 			if (event.type == Event::TextEntered)
 			{
-				if (event.key.code == 8)
+				if (event.key.code == 8&&playerName.size()!=0)
 				{
 					playerName.pop_back();
 					playerNameText.setString(temp + playerName);
@@ -328,7 +326,7 @@ void mainGame_Brick::SaveGame(string filename)
 	//Lưu điểm
 	f << point->GetDiem() <<endl;
 	//Lưu số mạng còn lại
-	f << hearts.size();
+	f << ball->getLive();
 	f.close();
 }
 
@@ -393,6 +391,7 @@ void mainGame_Brick::LoadGame(string filename)
 	point->setDiem(diem);
 	int heartNumber;
 	f >> heartNumber;
+	ball->setLive(heartNumber);
 	vector<Heart_BrickGame*> newHearts;
 	for (int i = 1; i <= heartNumber; i++)
 	{
@@ -403,4 +402,102 @@ void mainGame_Brick::LoadGame(string filename)
 	}
 	hearts = newHearts;
 	f.close();
+}
+
+//Pause game
+int mainGame_Brick::PauseGame(RenderWindow* window)
+{
+	mainGame_Brick newGame = *this;
+	Texture tex;
+	tex.loadFromFile("Graphics/sprites/MenuBack.png");
+	Texture t[8];
+	t[0].loadFromFile("Graphics/Button/Play1.png");
+	t[1].loadFromFile("Graphics/Button/Play2.png");
+	t[2].loadFromFile("Graphics/Button/MainMenu1.png");
+	t[3].loadFromFile("Graphics/Button/MainMenu2.png");
+	t[4].loadFromFile("Graphics/Button/Save1.png");
+	t[5].loadFromFile("Graphics/Button/Save2.png");
+	t[6].loadFromFile("Graphics/Button/Load1.png");
+	t[7].loadFromFile("Graphics/Button/Load2.png");
+	Sprite sprite[4];
+	for (int i = 0; i < 4; i++)
+	{
+		sprite[i].setTexture(t[i * 2]);
+	}
+	sprite[0].setPosition(350, 450);
+	sprite[1].setPosition(475, 450);
+	sprite[2].setPosition(625, 450);
+	sprite[3].setPosition(750, 450);
+	sprite[0].setTexture(t[1]);
+	int luachon = 0;
+	while (true)
+	{
+		window->clear();
+		newGame.Xuat(window);
+		Sprite sp(tex);
+		sp.setPosition(300, 250);
+		sf::Event event;
+		while (window->pollEvent(event))
+		{
+			switch (event.type)
+			{
+			case sf::Event::KeyReleased:
+				switch (event.key.code)
+				{
+				case sf::Keyboard::Left:
+				{
+					if (luachon == 0)
+					{
+						sprite[luachon].setTexture(t[luachon * 2]);
+						luachon = 3;
+						sprite[luachon].setTexture(t[luachon * 2 + 1]);
+					}
+					else
+					{
+						sprite[luachon].setTexture(t[luachon * 2]);
+						luachon--;
+						sprite[luachon].setTexture(t[luachon * 2 + 1]);
+					}
+					break;
+				}
+				case sf::Keyboard::Right:
+				{
+					if (luachon == 3)
+					{
+						sprite[luachon].setTexture(t[luachon * 2]);
+						luachon = 0;
+						sprite[luachon].setTexture(t[luachon * 2 + 1]);
+					}
+					else
+					{
+						sprite[luachon].setTexture(t[luachon * 2]);
+						luachon++;
+						sprite[luachon].setTexture(t[luachon * 2 + 1]);
+					}
+					break;
+				}
+				case sf::Keyboard::Enter:
+				{
+					paused = false;
+					window->clear();
+					return luachon;
+				}
+				}
+
+				break;
+
+				break;
+
+			}
+		}
+
+		window->draw(sp);
+		for (int i = 0; i < 4; i++)
+		{
+			window->draw(sprite[i]);
+		}
+		window->display();
+	}
+	
+	
 }

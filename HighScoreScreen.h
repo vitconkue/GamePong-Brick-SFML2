@@ -15,6 +15,7 @@ private:
 	std::vector<Text*> names; // danh sách các tên người đã chơi
 	std::vector<DiemSo*> highscores; // Danh sách tương ứng điểm của những người đó
 	Font* font; // biến lấy phông chữ
+	Texture background;//background
 public: 
 	void KhoiTao(RenderWindow* window); // khởi tạo màn hình
 	void CapNhat(RenderWindow* window); // cập nhật các yếu tố liên quan, nhận input bàn phím
