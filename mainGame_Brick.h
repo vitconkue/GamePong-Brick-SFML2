@@ -20,6 +20,8 @@ public:
 	void InputName(); 
 	void InputName2(RenderWindow* window);
 	void LoadBrick(string filename);
+	void SaveGame(string filename);
+	void LoadGame(string filename);
 private: 
 	vector<Heart_BrickGame*> hearts;
 	vector<Brick_BrickGame*> brick;

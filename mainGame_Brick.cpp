@@ -9,7 +9,7 @@ void mainGame_Brick::KhoiTao(RenderWindow* window)
 	point = new DiemSo(*font, 64U);
 	ball = new Ball_BrickGame(point, player); 
 	ball->reset(window); 
-	this->pausedText = new Text("Paused. Press P to continue.\nPress Esc to exit.", *font, 64U);
+	this->pausedText = new Text("Paused. Press P to continue.\nPress Esc to exit.\nPress S to Save, Press L to Load.", *font, 64U);
 	this->pausedText->setOrigin(this->pausedText->getGlobalBounds().width / 2, this->pausedText->getGlobalBounds().height / 2);
 	this->pausedText->setPosition(window->getSize().x / 2, window->getSize().y / 2);
 	//Chữ khi thắng
@@ -40,6 +40,16 @@ void mainGame_Brick::CapNhat(RenderWindow* window)
 	{
 		if (Keyboard::isKeyPressed(Keyboard::Key::P) && !enterKey)
 		{
+			paused = false;
+		}
+		if (Keyboard::isKeyPressed(Keyboard::Key::S))
+		{
+			SaveGame("Save/1.txt");
+			paused = false;
+		}
+		if (Keyboard::isKeyPressed(Keyboard::Key::L))
+		{
+			LoadGame("Save/1.txt");
 			paused = false;
 		}
 		if (Keyboard::isKeyPressed(Keyboard::Key::Escape))
@@ -299,4 +309,105 @@ void mainGame_Brick::LoadBrick(string filename)
 		brick.push_back(b);
 	}
 	brick.pop_back();
+}
+
+//Ham save game
+void mainGame_Brick::SaveGame(string filename)
+{
+	fstream f;
+	f.open(filename, ios::out);
+	//Lưu gạch
+	f << brick.size() <<endl;
+	for (int i = 0; i < brick.size(); i++)
+	{
+		f << brick[i]->getPosition().x<<" "<<brick[i]->getPosition().y<<" "<<brick[i]->getShieldNumber()<<" "<<brick[i]->getBrickColor();
+		f << endl;
+	}
+	//Lưu vật phẩm
+	f << prize.size()<<endl;
+	for (int i = 0; i < prize.size(); i++)
+	{
+		f << prize[i]->getPosition().x << " " << prize[i]->getPosition().y << " " << prize[i]->getType();
+		f << endl;
+	}
+	//Lưu thanh trượt
+	f << player->getPosition().x << " " << player->getPosition().y << " " << player->getScale().x << " " << player->getScale().y << endl;
+	//Lưu bóng
+	f << ball->getPosition().x << " " << ball->getPosition().y << endl;
+	//Lưu điểm
+	f << point->GetDiem() <<endl;
+	//Lưu số mạng còn lại
+	f << hearts.size();
+}
+
+//Hàm load game
+void mainGame_Brick::LoadGame(string filename)
+{
+	fstream f;
+	f.open(filename, ios::in);
+	int brickNumber;
+	int prizeNumber;
+	f >> brickNumber;
+	vector<Brick_BrickGame*> newBrick;
+	for (int i = 0; i < brickNumber; i++)
+	{
+		Vector2f BrickPos;
+		int Sheild;
+		char Color;
+		f >> BrickPos.x >> BrickPos.y >> Sheild >> Color;
+		Vector2f brickSize;
+		brickSize.x = 90;
+		brickSize.y = 30;
+		Brick_BrickGame* b = new Brick_BrickGame;
+		if (Color == 'm')
+		{
+			b->setShieldNumber(4);
+		}
+		else
+		{
+			b->setShieldNumber(Sheild);
+		}
+		b->setPosition(BrickPos);
+		b->setOrigin(brickSize / 2.f);
+		b->setBrickColor(Color);
+		b->TaoTexture();
+		newBrick.push_back(b);
+	}
+	brick = newBrick;
+	f >> prizeNumber;
+	vector<Brick_Prize*> newPrize;
+	for (int i = 0; i < prizeNumber; i++)
+	{
+		Brick_Prize* p = new Brick_Prize;
+		Vector2f prizePos;
+		int kieu;
+		f >> prizePos.x >> prizePos.y >> kieu;
+		p->setPosition(prizePos);
+		p->setType(kieu);
+		p->TaoTexture();
+		newPrize.push_back(p);
+	}
+	prize = newPrize;
+	Vector2f playerPos;
+	Vector2f playerScale;
+	f >> playerPos.x >> playerPos.y >> playerScale.x >> playerScale.y;
+	player->setPosition(playerPos);
+	player->setScale(playerScale);
+	Vector2f ballPos;
+	f >> ballPos.x >> ballPos.y;
+	ball->setPosition(ballPos);
+	int diem;
+	f >> diem;
+	point->setDiem(diem);
+	int heartNumber;
+	f >> heartNumber;
+	vector<Heart_BrickGame*> newHearts;
+	for (int i = 1; i <= heartNumber; i++)
+	{
+		Heart_BrickGame* newHeart;
+		newHeart = new Heart_BrickGame();
+		newHeart->setPosition((float)(i - 1) * 40, 100);
+		newHearts.push_back(newHeart);
+	}
+	hearts = newHearts;
 }

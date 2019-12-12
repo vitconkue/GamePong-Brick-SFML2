@@ -17,6 +17,7 @@ protected:
 	bool touched_floor; 
 public :
 	int getType() { return type; }
+	void setType(int a) { type = 1; }
 	bool getTouchedPlayer() { return touched_player; }
 	bool getTouchedFloor() { return touched_floor;  }
 	Brick_Prize(); 
