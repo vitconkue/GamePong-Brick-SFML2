@@ -17,10 +17,7 @@ private:
 	Text* choi2; 
 	Text* highscore_menu; 
 	Text* thoat;
-	Text* madeby;
-
 	int luachon;
-
-	bool upKey, downKey;
+    bool upKey, downKey;
 };
 

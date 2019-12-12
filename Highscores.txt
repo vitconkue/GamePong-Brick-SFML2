@@ -11,3 +11,4 @@ an:200
 urh:250
 linh:400
 test34:200
+Superman:1750

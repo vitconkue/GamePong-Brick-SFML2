@@ -2,7 +2,7 @@
 
 Brick_Prize::Brick_Prize()
 {
-	type = randomNumber(1, 5); 
+	type = randomNumber(1, 5); // lấy số random 5 loại
 	switch (type)
 	{
 	case 1 :
@@ -71,12 +71,12 @@ void Brick_Prize::CapNhat(ThanhNguoiChoi_Brick*& player, DiemSo*& point, Ball_Br
 	}
 	if (getPosition().y > player->getPosition().y + 20)
 	{
-		touched_floor = true; 
+		touched_floor = true; // đã chạm sàn (vượt qua người chơi) 
 	}
 
 }
 
-void Brick_Prize::TaoTexture()
+void Brick_Prize::TaoTexture() // load hình ảnh vào, tuỳ vào loại
 {
 	switch (type)
 	{

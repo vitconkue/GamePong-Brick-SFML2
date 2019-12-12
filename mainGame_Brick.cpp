@@ -4,7 +4,7 @@ void mainGame_Brick::KhoiTao(RenderWindow* window)
 {
 	window->setFramerateLimit(120);
 	this->font = new sf::Font();
-	this->font->loadFromFile("Graphics/font.ttf");
+	this->font->loadFromFile("Graphics/font2.ttf");
 	player = new ThanhNguoiChoi_Brick;
 	point = new DiemSo(*font, 64U);
 	ball = new Ball_BrickGame(point, player); 

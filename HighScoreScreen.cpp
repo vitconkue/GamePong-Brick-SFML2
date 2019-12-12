@@ -5,7 +5,7 @@ void HighScoreScreen::KhoiTao(RenderWindow* window)
 {
 	// Load font
 	this->font = new sf::Font();
-	this->font->loadFromFile("Graphics/font.ttf");
+	this->font->loadFromFile("Graphics/font2.ttf");
 	introduce = new Text("HIGHSCORES", *font, 90U); 
 	introduce->setOrigin(introduce->getGlobalBounds().width / 2, introduce->getGlobalBounds().height / 2); 
 	introduce->setPosition(window->getSize().x / 2, 20); 
@@ -40,8 +40,7 @@ void HighScoreScreen::KhoiTao(RenderWindow* window)
 
 void HighScoreScreen::CapNhat(RenderWindow* window)
 {
-	if (Keyboard::isKeyPressed(Keyboard::Escape) || 
-		Keyboard::isKeyPressed(Keyboard::Enter))
+	if (Keyboard::isKeyPressed(Keyboard::Escape))
 	{
 		coreState.SetTrangThai(new Menu()); 
 	}

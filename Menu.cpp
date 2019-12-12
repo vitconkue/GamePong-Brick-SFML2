@@ -9,9 +9,9 @@ void Menu::KhoiTao(RenderWindow* window)
 	this->luachon = 0;
 	//lấy font chữ
 	this->font = new Font();
-	this->font->loadFromFile("Graphics/font.ttf");
+	this->font->loadFromFile("Graphics/font3.ttf");
 	//Tên game
-	this->tengame = new Text("PingPong Game - Brick Game", *this->font, 110U);
+	this->tengame = new Text("PingPong & Brick Game", *this->font, 110U);
 	this->tengame->setOrigin(this->tengame->getGlobalBounds().width / 2, this->tengame->getGlobalBounds().height / 2);
 	this->tengame->setPosition(window->getSize().x / 2, window->getSize().y / 8);
 	//Nút bắt đầu
@@ -21,19 +21,15 @@ void Menu::KhoiTao(RenderWindow* window)
 	// Nút bắt đầu chế độ brick
 	this->choi2 = new Text("Start Brick", *font, 90U);
 	this->choi2->setOrigin(choi2->getGlobalBounds().width / 2, choi2->getGlobalBounds().height / 2); 
-	this->choi2->setPosition(window->getSize().x / 2, window->getSize().y / 3 + 60); 
+	this->choi2->setPosition(window->getSize().x / 2, window->getSize().y / 3 + 80); 
 	// Nút vào highscore
 	this->highscore_menu = new Text("High Scores", *font, 90U);
 	this->highscore_menu->setOrigin(highscore_menu->getGlobalBounds().width / 2, highscore_menu->getGlobalBounds().height / 2);
-	this->highscore_menu->setPosition(window->getSize().x / 2, window->getSize().y / 3 + 120); 
+	this->highscore_menu->setPosition(window->getSize().x / 2, window->getSize().y / 3 + 160); 
 	//Nút thoát
 	this->thoat = new Text("Quit Game", *this->font, 128U);
 	this->thoat->setOrigin(this->thoat->getGlobalBounds().width / 2, this->thoat->getGlobalBounds().height / 2);
-	this->thoat->setPosition(window->getSize().x / 2, window->getSize().y / 3 + this->choi->getGlobalBounds().height + 150);
-
-	this->madeby = new Text("Made by 18120154 - 18120186", *this->font, 30U);
-	this->madeby->setOrigin(this->madeby->getGlobalBounds().width / 2, this->madeby->getGlobalBounds().height / 2);
-	this->madeby->setPosition(3 * window->getSize().x / 4, window->getSize().y / 2 + this->thoat->getGlobalBounds().height + this->choi->getGlobalBounds().height);
+	this->thoat->setPosition(window->getSize().x / 2, window->getSize().y / 3 + this->choi->getGlobalBounds().height + 240);
 }
 //Hàm cập nhật Menu
 void Menu::CapNhat(RenderWindow* window)
@@ -58,7 +54,7 @@ void Menu::CapNhat(RenderWindow* window)
 		this->luachon = 3;
 	}
 	//Bấm Enter để lựa chọn
-	if (Keyboard::isKeyPressed(Keyboard::Key::Enter))
+	if (Keyboard::isKeyPressed(Keyboard::Key::Space))
 	{
 		switch (this->luachon)
 		{
@@ -108,7 +104,7 @@ void Menu::Xuat(sf::RenderWindow* window)
 	case 3:
 		this->choi->setFillColor(Color::White);
 		this->choi2->setFillColor(Color::White);
-		this->thoat->setFillColor(Color::Green);
+		this->thoat->setFillColor(Color::Red);
 		this->highscore_menu->setFillColor(Color::White); 
 	}
 	window->draw(*this->tengame);
@@ -116,7 +112,6 @@ void Menu::Xuat(sf::RenderWindow* window)
 	window->draw(*this->choi2);
 	window->draw(*this->highscore_menu);
 	window->draw(*this->thoat);
-	window->draw(*this->madeby);
 }
 void Menu::Destroy(RenderWindow* window)
 {
@@ -125,5 +120,4 @@ void Menu::Destroy(RenderWindow* window)
 	delete this->choi;
 	delete this->choi2; 
 	delete this->thoat;
-	delete this->madeby;
 }
