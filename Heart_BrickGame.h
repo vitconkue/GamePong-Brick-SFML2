@@ -1,8 +1,8 @@
 #pragma once
 #include "VatThe.h"
-class Heart_BrickGame: public VatThe
+class Heart_BrickGame: public VatThe 
 {
 public: 
-	Heart_BrickGame(); 
+	Heart_BrickGame(); // constructor
 };
 

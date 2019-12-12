@@ -2,10 +2,10 @@
 
 Brick_Prize::Brick_Prize()
 {
-	type = randomNumber(1, 5); // lấy số random 5 loại
+	type = randomNumber(1, 5); // lấy số random 5 loại => mỗi loại sẽ có tỉ lệ 20% sinh ra khi vật phẩm mới sinh ra
 	switch (type)
 	{
-	case 1 :
+	case 1 : 
 		cout << "Prize x2 score created. " << endl; 
 		break;
 	case 2 : 
@@ -23,14 +23,15 @@ Brick_Prize::Brick_Prize()
 	}
 	if (type == 5) // cho tim rơi xuống nhanh hơn
 	{
-		VanToc.x = 0.f; 
-		VanToc.y = 1.6f;
+		speed.x = 0.f; 
+		speed.y = 1.6f;
 	}
 	else
 	{
-		VanToc.x = 0.f;
-		VanToc.y = 1.3f;
+		speed.x = 0.f;
+		speed.y = 1.3f;
 	}
+	// ban đầu tạo ra ở vị trí của viên gạch bị phá nên chưa chạm người chơi/sàn
 	touched_player = false; 
 	touched_floor = false;
 }
@@ -40,7 +41,7 @@ void Brick_Prize::CapNhat(ThanhNguoiChoi_Brick*& player, DiemSo*& point, Ball_Br
 	VatThe::CapNhat();
 	if (KiemTraVaCham(player))
 	{
-		touched_player = true;
+		touched_player = true; // chuyển đổi thành đã va chạm
 		switch (type)
 		{
 		case 1: // tăng điểm

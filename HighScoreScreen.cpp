@@ -1,4 +1,4 @@
-#include "HighScoreScreen.h"
+﻿#include "HighScoreScreen.h"
 #include "Menu.h"
 
 void HighScoreScreen::KhoiTao(RenderWindow* window)
@@ -6,31 +6,36 @@ void HighScoreScreen::KhoiTao(RenderWindow* window)
 	// Load font
 	this->font = new sf::Font();
 	this->font->loadFromFile("Graphics/font2.ttf");
-	introduce = new Text("HIGHSCORES", *font, 90U); 
-	introduce->setOrigin(introduce->getGlobalBounds().width / 2, introduce->getGlobalBounds().height / 2); 
-	introduce->setPosition(window->getSize().x / 2, 20); 
+	title = new Text("HIGHSCORES", *font, 90U); 
+	title->setOrigin(title->getGlobalBounds().width / 2, title->getGlobalBounds().height / 2); 
+	title->setPosition(window->getSize().x / 2, 20); 
 	fstream fin; 
-	fin.open("Highscores.txt", std::ios::in); 
-	int num; 
+	fin.open("Highscores.txt", std::ios::in);  // mở file để đọc
+	int num; // số người chơi mà chương trình đã lưu
 	fin >> num; 
 	fin.get(); 
-	string nm; int d; 
-	for(int i=0 ; i< num;i++)
+	string nm; // tên
+	int d; // điểm
+	// đọc toàn bộ người chơi và điểm của họ
+	for(int i=0 ; i< num;i++) 
 	{
 		getline(fin, nm, ':'); 
 		fin >> d; 
 		fin.get();
-		Text* tmpName = new Text(nm, *font, 40U);
+		Text* tmpName = new Text(nm, *font, 50U);
 		names.push_back(tmpName); 
-		DiemSo* tmpPoint = new DiemSo(*font, 40U); 
+		DiemSo* tmpPoint = new DiemSo(*font, 50U); 
 		tmpPoint->setDiem(d); 
 		highscores.push_back(tmpPoint);
 	}
 	fin.close();
-	Sort();
+	//sắp xếp lại hai vecto người chơi và điểm theo thứ tự tăng dần
+	Sort(); 
 	int len = highscores.size(); 
+	// chỉ hiện tối đa 5 người chơi điểm cao nhất lên màn hình
 	for (int i = 0; i < len && i < 5; i++)
 	{
+		// đặt vị trí in ra màn hình
 		names[i]->setOrigin(names[i]->getGlobalBounds().width / 2, names[i]->getGlobalBounds().height / 2); 
 		names[i]->setPosition(window->getSize().x/3, (i + 1) * window->getSize().y / 6);
 		highscores[i]->setOrigin(highscores[i]->getGlobalBounds().width / 2, highscores[i]->getGlobalBounds().height / 2);
@@ -40,7 +45,7 @@ void HighScoreScreen::KhoiTao(RenderWindow* window)
 
 void HighScoreScreen::CapNhat(RenderWindow* window)
 {
-	if (Keyboard::isKeyPressed(Keyboard::Escape))
+	if (Keyboard::isKeyPressed(Keyboard::Escape)) // nếu bấm Escape thì thoát ra menu 
 	{
 		coreState.SetTrangThai(new Menu()); 
 	}
@@ -49,10 +54,10 @@ void HighScoreScreen::CapNhat(RenderWindow* window)
 		highscores[i]->CapNhat(); 
 	}
 }
-
+//xuất ra màn hình
 void HighScoreScreen::Xuat(RenderWindow* window)
 {
-	window->draw(*introduce); 
+	window->draw(*title); 
 	for (int i = 0; i < highscores.size() && i < 5; i++)
 	{
 		names[i]->setFillColor(Color::White);
@@ -61,10 +66,10 @@ void HighScoreScreen::Xuat(RenderWindow* window)
 		window->draw(*highscores[i]); 
 	}
 }
-
+// hàm huỷ
 void HighScoreScreen::Destroy(RenderWindow* window)
 {
-	delete introduce; 
+	delete title; 
 }
 
 void HighScoreScreen::Sort()
@@ -77,11 +82,11 @@ void HighScoreScreen::Sort()
 		{
 			if (highscores[i]->GetDiem() < highscores[j]->GetDiem())
 			{
-				// swap diem
+				// swap điểm
 				DiemSo* tmp1 = highscores[i];
 				highscores[i] = highscores[j];
 				highscores[j] = tmp1; 
-				// swap ten 
+				// swap tên 
 				Text* tmp2 = names[i];
 				names[i] = names[j]; 
 				names[j] = tmp2; 

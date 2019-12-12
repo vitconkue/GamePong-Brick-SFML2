@@ -13,8 +13,8 @@ protected:
 	// type 3: tăng 1.4 lần chiều dài thanh
 	// type 4: giảm 1.4 lần chiều dài thanh
 	// type 5: tăng số mạng hiện có
-	bool touched_player; 
-	bool touched_floor; 
+	bool touched_player; // biến cho biết người chơi lấy được vật phẩm rơi xuống hay chưa
+	bool touched_floor; // biến cho biết vật phẩm đã vượt qua người chơi hay chưa
 public :
 	int getType() { return type; } // getter lấy loại vật phẩm
 	void setType(int a) { type = 1; }

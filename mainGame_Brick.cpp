@@ -1,5 +1,6 @@
 ﻿#include "mainGame_Brick.h"
 
+// Khởi tạo ban đầu
 void mainGame_Brick::KhoiTao(RenderWindow* window)
 {
 	window->setFramerateLimit(120);
@@ -29,11 +30,11 @@ void mainGame_Brick::KhoiTao(RenderWindow* window)
 	{
 		Heart_BrickGame* newHeart; 
 		newHeart = new Heart_BrickGame(); 
-		newHeart->setPosition((float)(i-1) * 40, 100); 
+		newHeart->setPosition((float)(i-1) * 40, 80); 
 		hearts.push_back(newHeart);
 	}
 }
-
+// cập nhật tất cả yếu tố liên quan trò chơi
 void mainGame_Brick::CapNhat(RenderWindow* window)
 {
 	if (paused)
@@ -57,16 +58,17 @@ void mainGame_Brick::CapNhat(RenderWindow* window)
 			coreState.SetTrangThai(new Menu());
 		}
 	}
-	else if (ball->getLive() == 0)
+	else if (ball->getLive() == 0) // hết mạng => thua, kết thúc game
 	{
 		endGame = true;
 	}
-	else if (brick.empty()) endGame = true; 
+	else if (brick.empty()) endGame = true;  // hết gạch=> thắng, kết thúc game
 	else {
-		//ball->CapNhat(window, point, player);
+		// cập nhật các yếu tố liên quan bóng
 		ball->CapNhat(window, point, player, hearts);
+		// cập nhật các yếu tố liên quan thanh trượt
 		player->CapNhat(window);
-		//Cap Nhap Brick
+		//Cập nhật gạch
 		for (int i = 0; i < brick.size(); i++)
 		{
 			brick[i]->CapNhat(ball, point);
@@ -74,26 +76,27 @@ void mainGame_Brick::CapNhat(RenderWindow* window)
 		for (int i = 0; i < brick.size(); i++)
 		{
 
-			if (brick[i]->getShieldNumber() == 0)
+			if (brick[i]->getShieldNumber() == 0) // đã phá được gạch
 			{
-				int p_factor = randomNumber(1, 2); 
-				if (p_factor == 1)
+				int p_factor = randomNumber(1, 2); // tạo random 2 số 1 hoặc 2
+				if (p_factor == 1) // chọn 1 số làm điều kiện tạo mới vật phẩm => tỉ lệ 50% tạo ra vật phẩm
 				{
+					// tạo vật phẩm mới, cho vào vector
 					Brick_Prize* newPrize = new Brick_Prize;
 					newPrize->TaoTexture();
-					newPrize->setPosition(brick[i]->getPosition());
+					newPrize->setPosition(brick[i]->getPosition()); // vị trí ban đầu ở vị trí gạch bị vỡ
 					prize.push_back(newPrize);
 				}
-				brick.erase(brick.begin() + i);
+				brick.erase(brick.begin() + i); // xoá gạch đã phá
 			}
 		}
-		// Cap nhat vat the
-		   // cap nhat tung vat the
+		// Cập nhật vật thể
+		   // Cập nhật từng vật thể
 		for (int i = 0; i < prize.size(); i++)
 		{
 			prize[i]->CapNhat(player,point,ball); 
 		}
-		   // xoa vat the khoi man hinh
+		   // xoá vật thể 
 		for (int i = 0; i < prize.size(); i++)
 		{
 			if (prize[i]->getTouchedPlayer() || prize[i]->getTouchedFloor())
@@ -101,15 +104,18 @@ void mainGame_Brick::CapNhat(RenderWindow* window)
 				prize.erase(prize.begin() + i);
 			}
 		}
+		// cập nhật điểm
 		point->CapNhat();
 		if (Keyboard::isKeyPressed(Keyboard::Key::P) && !enterKey) 
 			paused = true;
 		enterKey = Keyboard::isKeyPressed(Keyboard::Key::P);
+		// Nếu nhấn space thì reset vị trí bắt đầu game ( để dự phòng)
 		if (Keyboard::isKeyPressed(Keyboard::Key::Space))
 			ball->reset(window); 
 	}
 	this->enterKey = Keyboard::isKeyPressed(Keyboard::Key::P);
-	//Cap nhật hiệu ứng Paddle
+	//Cập nhật hiệu ứng thanh người chơi
+	// biến Effect liên tục thay đổi, mỗi lần thay đổi lại load một texture khác
 	Effect++;
 	if (Effect == 61)
 	{
@@ -132,9 +138,10 @@ void mainGame_Brick::CapNhat(RenderWindow* window)
 	}
 }
 
-
+// Xuất ra màn hình 
 void mainGame_Brick::Xuat(RenderWindow* window)
 {
+	// vẽ tất cả các thành phần game
 	window->draw(*ball); 
 	window->draw(*player); 
 	window->draw(*point); 
@@ -154,24 +161,24 @@ void mainGame_Brick::Xuat(RenderWindow* window)
 	{
 		window->draw(*pausedText); 
 	}
-	// xu li endgame o day
+	// xử lí thắng thua
 	if (endGame)
 	{
-		if (ball->getLive() == 0) // truong hop thua
+		if (ball->getLive() == 0) // trường hợp thua
 		{ 
 			window->draw(*lose);
-			if (Keyboard::isKeyPressed(Keyboard::Key::A))
+			if (Keyboard::isKeyPressed(Keyboard::Key::A)) // nhấn A => chơi lại
 			{
 				InputName(window);
 				coreState.SetTrangThai(new mainGame_Brick());
 			}
-			else if (Keyboard::isKeyPressed(Keyboard::Key::Escape))
+			else if (Keyboard::isKeyPressed(Keyboard::Key::Escape)) //Nhân Escape => thoát ra menu
 			{
 				InputName(window);
 				coreState.SetTrangThai(new Menu());
 			}
 		}
-		else // truong hop thang
+		else // trường hợp thắng
 		{
 			window->draw(*win);
 			if (Keyboard::isKeyPressed(Keyboard::Key::A))
@@ -195,14 +202,14 @@ void mainGame_Brick::Destroy(RenderWindow* window)
 	delete ball; 
 	delete font; 
 }
-
+// Hàm nhập tên để lưu file khi đã kết thúc game
 void mainGame_Brick::InputName(RenderWindow* window)
 {
 	string playerName=""; 
 	string temp = "Enter Yourname: ";
 	Text playerNameText("", *font, 30U);
 	playerNameText.setString(temp);
-	playerNameText.setCharacterSize(100);
+	playerNameText.setCharacterSize(70);
 	playerNameText.setPosition(0, 300);
 	window->clear();
 	window->draw(playerNameText);
@@ -263,7 +270,7 @@ void mainGame_Brick::InputName(RenderWindow* window)
 	}
 	
 }
-
+// Load gạch từ file
 void mainGame_Brick::LoadBrick(string filename)
 {
 	fstream f;
@@ -295,7 +302,7 @@ void mainGame_Brick::LoadBrick(string filename)
 	brick.pop_back();
 }
 
-//Ham save game
+//Hàm lưu game
 void mainGame_Brick::SaveGame(string filename)
 {
 	fstream f;

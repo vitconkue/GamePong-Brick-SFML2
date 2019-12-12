@@ -1,4 +1,4 @@
-#include "Brick_BrickGame.h"
+﻿#include "Brick_BrickGame.h"
 
 
 Brick_BrickGame::Brick_BrickGame()
@@ -24,80 +24,80 @@ void Brick_BrickGame::CapNhat(Ball_BrickGame*& m_ball, DiemSo*& point)
 	Vector2f ballSize(m_ball->getGlobalBounds().width, m_ball->getGlobalBounds().height);
 	if (KiemTraVaCham(m_ball))
 	{
-		if (m_ball->VanToc.x > 0 && m_ball->VanToc.y < 0)
+		if (m_ball->speed.x > 0 && m_ball->speed.y < 0)
 		{
 			if (ballPos.x > brickPos.x - brickSize.x / 2 + ballSize.x / 2)
 			{
-				m_ball->VanToc.y *= -1;
+				m_ball->speed.y *= -1;
 			}
 			else if(ballPos.y < brickPos.y + brickSize.y / 2 - ballSize.y / 2)
 			{
-				m_ball->VanToc.x *= -1;
+				m_ball->speed.x *= -1;
 			}
 			else
 			{
-				m_ball->VanToc.x *= -1;
-				m_ball->VanToc.y *= -1;
+				m_ball->speed.x *= -1;
+				m_ball->speed.y *= -1;
 			}
 		}
-		else if (m_ball->VanToc.x > 0 && m_ball->VanToc.y > 0)
+		else if (m_ball->speed.x > 0 && m_ball->speed.y > 0)
 		{
 			if (ballPos.x > brickPos.x - brickSize.x / 2 + ballSize.x / 2)
 			{
-				m_ball->VanToc.y *= -1;
+				m_ball->speed.y *= -1;
 			}
 			else if (ballPos.y > brickPos.y - brickSize.y / 2 + ballSize.y / 2)
 			{
-				m_ball->VanToc.x *= -1;
+				m_ball->speed.x *= -1;
 			}
 			else
 			{
-				m_ball->VanToc.x *= -1;
-				m_ball->VanToc.y *= -1;
+				m_ball->speed.x *= -1;
+				m_ball->speed.y *= -1;
 			}
 		}
-		else if (m_ball->VanToc.x < 0 && m_ball->VanToc.y < 0)
+		else if (m_ball->speed.x < 0 && m_ball->speed.y < 0)
 		{
 			if (ballPos.x < brickPos.x + brickSize.x / 2 - ballSize.x/2)
 			{
-				m_ball->VanToc.y *= -1;
+				m_ball->speed.y *= -1;
 			}
 			else if(ballPos.y < brickPos.y + brickSize.y / 2 - ballSize.y / 2)
 			{
-				m_ball->VanToc.x *= -1;
+				m_ball->speed.x *= -1;
 			}
 			else
 			{
-				m_ball->VanToc.x *= -1;
-				m_ball->VanToc.y *= -1;
+				m_ball->speed.x *= -1;
+				m_ball->speed.y *= -1;
 			}
 		}
-		else if (m_ball->VanToc.x < 0 && m_ball->VanToc.y > 0)
+		else if (m_ball->speed.x < 0 && m_ball->speed.y > 0)
 		{
 			if (ballPos.x < brickPos.x + brickSize.x / 2  - ballSize.x/2)
 			{
-				m_ball->VanToc.y *= -1;
+				m_ball->speed.y *= -1;
 			}
 			else if(ballPos.y > brickPos.y - brickSize.y / 2 + ballSize.y / 2)
 			{
-				m_ball->VanToc.x *= -1;
+				m_ball->speed.x *= -1;
 			}
 			else
 			{
-				m_ball->VanToc.x *= -1;
-				m_ball->VanToc.y *= -1;
+				m_ball->speed.x *= -1;
+				m_ball->speed.y *= -1;
 			}
 		}
-		if (Shield != 4)
+		if (Shield != 4) // Shield = 4 là gạch vật cản, không thể phá
 		{
 			Shield--;
 			if (Shield == 0)
 			{
-				point->TangThem(100);
+				point->TangThem(100); // nếu phá được gạch + 100 điểm
 			}
 			else
 			{
-				point->TangThem(50);
+				point->TangThem(50); // chạm nhưng không phá được gạch + 50 điểm
 			}
 		}
 		TaoTexture();
@@ -106,9 +106,10 @@ void Brick_BrickGame::CapNhat(Ball_BrickGame*& m_ball, DiemSo*& point)
 
 void Brick_BrickGame::TaoTexture()
 {
+	// tuỳ vào trạng thái hiện tại của gạch mà lấy texture phù hợp để vẽ lên màn hình
 	if (Shield == 4)
 	{
-		Load("MaxBrick.png");
+		Load("MaxBrick.png"); // vật cản
 	}
 	else if (Shield == 3)
 	{

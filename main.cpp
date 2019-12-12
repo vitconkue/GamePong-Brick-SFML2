@@ -1,4 +1,4 @@
-#define NOMINMAX
+﻿#define NOMINMAX
 #include <Windows.h>
 #include "TrangThaiGame.h"
 #include "Menu.h"
@@ -9,7 +9,7 @@ bool quitGame = false;
 
 int main()
 {
-	RenderWindow window(VideoMode(1200, 900), "PingPong");
+	RenderWindow window(VideoMode(1200, 900), "PingPong"); // tạo cửa sổ
 	coreState.SetWindow(&window);
 	coreState.SetTrangThai(new Menu());
 	while (window.isOpen())

@@ -10,7 +10,7 @@ class VatThe : public Sprite
 private:
 	Texture* texture;
 public:
-	Vector2f VanToc; //vận tốc của vật sử dụng vector2f trong Sprite
+	Vector2f speed; //vận tốc của vật sử dụng vector2f trong Sprite
 	//Hàm đọc thông tin từ file.
 	void Load(string filename)
 	{
@@ -20,12 +20,12 @@ public:
 	//Hàm cập nhật vận tốc 
 	virtual void CapNhat()
 	{
-		this->move(this->VanToc);
+		this->move(this->speed);
 	}
 	//Hàm kiểm tra va chạm
-	bool KiemTraVaCham(VatThe* thucthe)
+	bool KiemTraVaCham(VatThe* object)
 	{
-		return this->getGlobalBounds().intersects(thucthe->getGlobalBounds());
+		return this->getGlobalBounds().intersects(object->getGlobalBounds());
 	}
 	VatThe()
 	{

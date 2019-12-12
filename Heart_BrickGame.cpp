@@ -1,6 +1,8 @@
-#include "Heart_BrickGame.h"
+﻿#include "Heart_BrickGame.h"
 
-Heart_BrickGame::Heart_BrickGame()
+
+// load hình ảnh vào
+Heart_BrickGame::Heart_BrickGame() 
 {
 	Load("Heart.png"); 
 }

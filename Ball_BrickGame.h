@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <SFML\Audio.hpp>
 #include "VatThe.h"
 #include "Thanh.h"
@@ -9,18 +9,18 @@
 class Ball_BrickGame : public VatThe
 {
 private: 
-	DiemSo* diem; 
-	int lives;
-	Thanh* player; 
-	sf::SoundBuffer* buffer; 
-	sf::Sound* sound; 
+	DiemSo* diem; // điểm
+	int lives; // mạng 
+	Thanh* player; // thanh người chơi
+	sf::SoundBuffer* buffer; // biến buffer âm thanh
+	sf::Sound* sound; // âm thanh
 public: 
-	Ball_BrickGame(DiemSo* d, Thanh* p); 
-	void CapNhat(sf::RenderWindow* window, DiemSo*& point, ThanhNguoiChoi_Brick* player, vector<Heart_BrickGame*> &hearts); 
-	void reset(sf::RenderWindow* window); 
-	void setPlayer(Thanh* _player); 
-	int getLive() { return lives; }
-	void  increaseLive() { lives += 1;  }
+	Ball_BrickGame(DiemSo* d, Thanh* p); // constructor 
+	void CapNhat(sf::RenderWindow* window, DiemSo*& point, ThanhNguoiChoi_Brick* player, vector<Heart_BrickGame*> &hearts); // cập nhật các yếu tố liên quan
+	void reset(sf::RenderWindow* window); // reset(khi không đỡ được thanh) 
+	void setPlayer(Thanh* _player);  // setter player
+	int getLive() { return lives; } // getter lấy số mạng còn lại hiện tại
+	void  increaseLive() { lives += 1;  } // tăng mạng (khi ăn vật phẩm) 
 	~Ball_BrickGame(); 
 
 };

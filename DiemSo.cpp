@@ -9,10 +9,12 @@ void DiemSo::TangDan()
 {
 	this->GiaTri += 1;
 }
+// Tăng giá trị điểm lên x
 void DiemSo::TangThem(int x)
 {
 	GiaTri += x; 
 }
+// Giảm giá trị điểm xuống x
 void DiemSo::GiamXuong(int x)
 {
 	GiaTri -= x; 

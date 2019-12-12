@@ -21,7 +21,7 @@ void ThanhNguoiChoi::CapNhat()
 	{
 	case 0:
 		//Thanh số 0 sẽ điều khiển lên xuống với nút S, W và với tốc độ 1.5f
-		this->VanToc.y = Keyboard::isKeyPressed(Keyboard::Key::S) - Keyboard::isKeyPressed(Keyboard::Key::W);
+		this->speed.y = Keyboard::isKeyPressed(Keyboard::Key::S) - Keyboard::isKeyPressed(Keyboard::Key::W);
 		if (Keyboard::isKeyPressed(Keyboard::Key::S))
 		{
 			this->move(0, 1.5);
@@ -33,7 +33,7 @@ void ThanhNguoiChoi::CapNhat()
 		break;
 	default:
 		//Thanh số 1 sẽ điều khiển lên xuống với nút mũi tên lên, xuống và với tốc độ 1.5f
-		this->VanToc.y = Keyboard::isKeyPressed(Keyboard::Key::Down) - Keyboard::isKeyPressed(Keyboard::Key::Up);
+		this->speed.y = Keyboard::isKeyPressed(Keyboard::Key::Down) - Keyboard::isKeyPressed(Keyboard::Key::Up);
 		if (sf::Keyboard::isKeyPressed(Keyboard::Key::Down))
 		{
 			this->move(0, 1.5);

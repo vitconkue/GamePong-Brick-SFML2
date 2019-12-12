@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "TrangThaiGame.h"
 #include "ThanhNguoiChoi_Brick.h"
 #include "DiemSo.h"
@@ -10,25 +10,26 @@
 #include "SupportFunction.h"
 #include <fstream>
 
+// là một trạng thái
 class mainGame_Brick : public TrangThai
 {
 public: 
-	void KhoiTao(RenderWindow* window);
-	void CapNhat(RenderWindow* window);
-	void Xuat(RenderWindow* window);
-	void Destroy(RenderWindow* window);
-	void InputName(RenderWindow* window);
-	void LoadBrick(string filename);
-	void SaveGame(string filename);
-	void LoadGame(string filename);
+	void KhoiTao(RenderWindow* window); // hàm khởi tạo
+	void CapNhat(RenderWindow* window); // cập nhật các yếu tố có trong trò chơi
+	void Xuat(RenderWindow* window); // Xuất ra màn hình
+	void Destroy(RenderWindow* window); // Hàm huỷ
+	void InputName(RenderWindow* window); // Hiện màn hình nhập tên
+	void LoadBrick(string filename); // Load vị trí, màu gạch từ file
+	void SaveGame(string filename); // lưu game
+	void LoadGame(string filename); // load game
 private: 
-	vector<Heart_BrickGame*> hearts;
-	vector<Brick_BrickGame*> brick;
-	vector<Brick_Prize*> prize;  
-	ThanhNguoiChoi_Brick* player; 
-	Ball_BrickGame* ball; 
-	DiemSo* point; 
-	Text* pausedText;
+	vector<Heart_BrickGame*> hearts; // vector mạng
+	vector<Brick_BrickGame*> brick; // vector chứa các viên gạch
+	vector<Brick_Prize*> prize;  //vector chứa các vật phẩm
+	ThanhNguoiChoi_Brick* player; // thanh người chơi
+	Ball_BrickGame* ball; // bóng
+	DiemSo* point; // điểm người chơi
+	Text* pausedText; 
 	Font* font; 
 	Text* win; 
 	Text* lose; 
