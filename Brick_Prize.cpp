@@ -1,5 +1,7 @@
 ﻿#include "Brick_Prize.h"
 
+
+// constructor tạo vật phẩm ngẫu nhiên
 Brick_Prize::Brick_Prize()
 {
 	type = randomNumber(1, 5); // lấy số random 5 loại => mỗi loại sẽ có tỉ lệ 20% sinh ra khi vật phẩm mới sinh ra
@@ -33,6 +35,22 @@ Brick_Prize::Brick_Prize()
 	}
 	// ban đầu tạo ra ở vị trí của viên gạch bị phá nên chưa chạm người chơi/sàn
 	touched_player = false; 
+	touched_floor = false;
+}
+// constructor truyền loại vật phẩm mong muốn. 
+Brick_Prize::Brick_Prize(int _type)
+{
+	type = _type; 
+	speed.x = 0.f; 
+	if (type != 5)
+	{
+		speed.y = 1.3; 
+	}
+	else
+	{
+		speed.y = 1.6; 
+	}
+	touched_player = false;
 	touched_floor = false;
 }
 

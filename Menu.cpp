@@ -31,7 +31,7 @@ void Menu::KhoiTao(RenderWindow* window)
 	this->thoat->setOrigin(this->thoat->getGlobalBounds().width / 2, this->thoat->getGlobalBounds().height / 2);
 	this->thoat->setPosition(window->getSize().x / 2, window->getSize().y / 3 + this->choi->getGlobalBounds().height + 240);
 	//background
-	background.loadFromFile("Graphics/sprites/MainMenuBackground.png");
+	background.loadFromFile("Graphics/sprites/InGameBackGround.png");
 }
 //Hàm cập nhật Menu
 void Menu::CapNhat(RenderWindow* window)
