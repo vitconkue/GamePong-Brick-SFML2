@@ -41,6 +41,7 @@ void HighScoreScreen::KhoiTao(RenderWindow* window)
 		highscores[i]->setOrigin(highscores[i]->getGlobalBounds().width / 2, highscores[i]->getGlobalBounds().height / 2);
 		highscores[i]->setPosition(window->getSize().x *2/3, (i + 1) * window->getSize().y / 6);   
 	}
+	background.loadFromFile("Graphics/sprites/backgroundHighscore.png");
 }
 
 void HighScoreScreen::CapNhat(RenderWindow* window)
@@ -57,12 +58,15 @@ void HighScoreScreen::CapNhat(RenderWindow* window)
 //xuất ra màn hình
 void HighScoreScreen::Xuat(RenderWindow* window)
 {
+	Sprite sp(background); 
+	window->draw(sp); 
+	title->setFillColor(Color::Black); 
 	window->draw(*title); 
 	for (int i = 0; i < highscores.size() && i < 5; i++)
 	{
-		names[i]->setFillColor(Color::White);
+		names[i]->setFillColor(Color::Red);
 		window->draw(*names[i]); 
-		highscores[i]->setFillColor(Color::Green);
+		highscores[i]->setFillColor(Color::Blue);
 		window->draw(*highscores[i]); 
 	}
 }
