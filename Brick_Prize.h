@@ -4,6 +4,7 @@
 #include "Ball_BrickGame.h"
 #include "Brick_BrickGame.h"
 #include "ThanhNguoiChoi_Brick.h"
+#include "Thanh_Bot_Brick.h"
 class Brick_Prize : public VatThe
 {
 protected:
@@ -23,6 +24,7 @@ public :
 	Brick_Prize(); // constructor
 	Brick_Prize(int _type); 
 	void CapNhat(ThanhNguoiChoi_Brick*&player, DiemSo*& point, Ball_BrickGame*& ball);  // cập nhật các yếu tố liên quan 
+	void CapNhat(Thanh_Bot_Brick*& botPlayer, DiemSo*& point, Ball_BrickGame*& ball); 
 	void TaoTexture(); // tạo texture, load hình ảnh vào
 };
 

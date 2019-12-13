@@ -72,13 +72,13 @@ void Brick_Prize::CapNhat(ThanhNguoiChoi_Brick*& player, DiemSo*& point, Ball_Br
 			if (player->getScale().x <= 2.f) // giới hạn không cho thanh to vượt mức
 			{
 				player->setScale(player->getScale().x * 2, 1.0); // tăng chiều dài hoành độ 2 lần
-				_ball->setPlayer(player);
+				//_ball->setPlayer(player);
 			}
 			break; 
 		case 4: // giảm chiều dài thanh
 			if(player->getScale().x >= 0.5f)  // giới hạn không cho thanh nhỏ vượt mức
 			player->setScale(player->getScale().x / 2, 1.0); // giảm chiều dài hoành độ 2 lần
-			_ball->setPlayer(player);
+			//_ball->setPlayer(player);
 			break; 
 		case 5:
 			if (_ball->getLive() < 6) // tối đa 6 mạng
@@ -93,6 +93,46 @@ void Brick_Prize::CapNhat(ThanhNguoiChoi_Brick*& player, DiemSo*& point, Ball_Br
 		touched_floor = true; // đã chạm sàn (vượt qua người chơi) 
 	}
 
+}
+
+void Brick_Prize::CapNhat(Thanh_Bot_Brick*& botPlayer, DiemSo*& point, Ball_BrickGame*& _ball)
+{
+	VatThe::CapNhat();
+	if (KiemTraVaCham(botPlayer))
+	{
+		touched_player = true; // chuyển đổi thành đã va chạm
+		switch (type)
+		{
+		case 1: // tăng điểm
+			point->setDiem(point->GetDiem() * 2);
+			break;
+		case 2: // giảm điểm
+			point->setDiem(point->GetDiem() / 2);
+			break;
+		case 3: // tăng chiều dài thanh
+			if (botPlayer->getScale().x <= 2.f) // giới hạn không cho thanh to vượt mức
+			{
+				botPlayer->setScale(botPlayer->getScale().x * 2, 1.0); // tăng chiều dài hoành độ 2 lần
+				//_ball->setPlayer(player);
+			}
+			break;
+		case 4: // giảm chiều dài thanh
+			if (botPlayer->getScale().x >= 0.5f)  // giới hạn không cho thanh nhỏ vượt mức
+				botPlayer->setScale(botPlayer->getScale().x / 2, 1.0); // giảm chiều dài hoành độ 2 lần
+				//_ball->setPlayer(player);
+			break;
+		case 5:
+			if (_ball->getLive() < 6) // tối đa 6 mạng
+			{
+				_ball->increaseLive(); // tăng số mạng hiện có
+			}
+			break;
+		}
+	}
+	if (getPosition().y > botPlayer->getPosition().y + 20)
+	{
+		touched_floor = true; // đã chạm sàn (vượt qua người chơi) 
+	}
 }
 
 void Brick_Prize::TaoTexture() // load hình ảnh vào, tuỳ vào loại

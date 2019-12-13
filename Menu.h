@@ -1,7 +1,8 @@
 #pragma once
-#include "TrangThaiGame.h"
-#include "mainGame_Brick.h"
+
 #include "HighScoreScreen.h"
+#include "mainGame_Bot.h"
+
 using namespace sf;
 class Menu : public TrangThai
 {
@@ -12,9 +13,10 @@ public:
 	void Destroy(RenderWindow* window);
 private:
 	Font* font;
-	Text* tengame;
-	Text* choi;
-	Text* choi2; 
+	Text* title;
+	Text* pongGame;
+	Text* brickGame; 
+	Text* brickBotGame; 
 	Text* highscore_menu; 
 	Text* thoat;
 	int luachon;
