@@ -21,6 +21,7 @@ public :
 	bool getTouchedPlayer() { return touched_player; } // getter trạng thái người chơi lấy được vật phẩm  hay chưa
 	bool getTouchedFloor() { return touched_floor; } // getter trạng thái vật phẩm vượt qua người chơi hay chưa
 	Brick_Prize(); // constructor
+	Brick_Prize(int _type); 
 	void CapNhat(ThanhNguoiChoi_Brick*&player, DiemSo*& point, Ball_BrickGame*& ball);  // cập nhật các yếu tố liên quan 
 	void TaoTexture(); // tạo texture, load hình ảnh vào
 };
