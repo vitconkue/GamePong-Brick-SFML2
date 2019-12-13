@@ -25,7 +25,12 @@ void mainGame_Brick::KhoiTao(RenderWindow* window)
 	this->enterKey = false;
 	this->endGame = false;
 	Effect = 1;
-	LoadBrick("BrickLevel/level1.txt");
+	//Chon level khi khoi tao
+	string level = Level(window);
+	string filename = "BrickLevel/level";
+	filename += level;
+	filename += ".txt";
+	LoadBrick(filename);
 	for (int i = 1; i <= 6; i++)
 	{
 		Heart_BrickGame* newHeart; 
@@ -41,14 +46,19 @@ void mainGame_Brick::CapNhat(RenderWindow* window)
 	if (paused)
 	{
 		int choose = PauseGame(window);
-	if (choose==2)
+		if (choose == 1)
+		{
+			coreState.SetTrangThai(new Menu());
+			return;
+		}
+		if (choose==2)
 		{
 			SaveGame("Save/1.txt");
 			paused = false;
 		}
 		if (choose==3)
 		{
-			KhoiTao(window);
+			//KhoiTao(window);
 			LoadGame("Save/1.txt");
 			paused = false;
 		}
@@ -101,14 +111,12 @@ void mainGame_Brick::CapNhat(RenderWindow* window)
 		}
 		// cập nhật điểm
 		point->CapNhat();
-		if (Keyboard::isKeyPressed(Keyboard::Key::P) && !enterKey) 
+		if (Keyboard::isKeyPressed(Keyboard::Key::Escape) && !enterKey)
+		{
 			paused = true;
-		enterKey = Keyboard::isKeyPressed(Keyboard::Key::P);
-		// Nếu nhấn space thì reset vị trí bắt đầu game ( để dự phòng)
-		if (Keyboard::isKeyPressed(Keyboard::Key::Space))
-			ball->reset(window); 
+		}
 	}
-	this->enterKey = Keyboard::isKeyPressed(Keyboard::Key::P);
+	this->enterKey = Keyboard::isKeyPressed(Keyboard::Key::Enter);
 	//Cập nhật hiệu ứng thanh người chơi
 	// biến Effect liên tục thay đổi, mỗi lần thay đổi lại load một texture khác
 	Effect++;
@@ -164,13 +172,13 @@ void mainGame_Brick::Xuat(RenderWindow* window)
 	{
 		if (ball->getLive() == 0) // trường hợp thua
 		{ 
-			window->draw(*lose);
-			if (Keyboard::isKeyPressed(Keyboard::Key::A)) // nhấn A => chơi lại
+			int choose = EndGame(window);
+			if(choose == 0)
 			{
 				InputName(window);
 				coreState.SetTrangThai(new mainGame_Brick());
 			}
-			else if (Keyboard::isKeyPressed(Keyboard::Key::Escape)) //Nhân Escape => thoát ra menu
+			else if (choose == 1)
 			{
 				InputName(window);
 				coreState.SetTrangThai(new Menu());
@@ -178,17 +186,18 @@ void mainGame_Brick::Xuat(RenderWindow* window)
 		}
 		else // trường hợp thắng
 		{
-			window->draw(*win);
-			if (Keyboard::isKeyPressed(Keyboard::Key::A))
+			int choose = EndGame(window);
+			if (choose == 0)
 			{
 				InputName(window);
-				coreState.SetTrangThai(new mainGame_Brick());
+				mainGame_Brick* maingame = new mainGame_Brick();
+				coreState.SetTrangThai(maingame);
 			}
-			else if (Keyboard::isKeyPressed(Keyboard::Key::Escape))
+			else if (choose == 1)
 			{
 				InputName(window);
 				coreState.SetTrangThai(new Menu());
-            }
+			}
 		}
 	}
 }
@@ -203,13 +212,16 @@ void mainGame_Brick::Destroy(RenderWindow* window)
 // Hàm nhập tên để lưu file khi đã kết thúc game
 void mainGame_Brick::InputName(RenderWindow* window)
 {
+	Texture tex;
+	tex.loadFromFile("Graphics/sprites/EnterName.png");
+	Sprite background(tex);
 	string playerName=""; 
-	string temp = "Enter Yourname: ";
 	Text playerNameText("", *font, 30U);
-	playerNameText.setString(temp);
-	playerNameText.setCharacterSize(70);
-	playerNameText.setPosition(0, 300);
+	playerNameText.setFillColor(Color::Black);
+	playerNameText.setCharacterSize(50);
+	playerNameText.setPosition(350, 385);
 	window->clear();
+	window->draw(background);
 	window->draw(playerNameText);
 	window->display();
 	int kt = 0;
@@ -223,10 +235,9 @@ void mainGame_Brick::InputName(RenderWindow* window)
 				if (event.key.code == 8&&playerName.size()!=0)
 				{
 					playerName.pop_back();
-					playerNameText.setString(temp + playerName);
-					playerNameText.setCharacterSize(100);
-					playerNameText.setPosition(0, 300);
+					playerNameText.setString(playerName);
 					window->clear();
+					window->draw(background);
 					window->draw(playerNameText);
 					window->display();
 					std::cout << playerName << endl;
@@ -254,10 +265,9 @@ void mainGame_Brick::InputName(RenderWindow* window)
 				else
 				{
 					playerName += event.key.code;
-					playerNameText.setString(temp + playerName);
-					playerNameText.setCharacterSize(100);
-					playerNameText.setPosition(0, 300);
+					playerNameText.setString(playerName);
 					window->clear();
+					window->draw(background);
 					window->draw(playerNameText);
 					window->display();
 					std::cout << playerName << endl;
@@ -407,6 +417,16 @@ void mainGame_Brick::LoadGame(string filename)
 //Pause game
 int mainGame_Brick::PauseGame(RenderWindow* window)
 {
+	Text tiltle;
+	tiltle.setString("PAUSE");
+	Font f;
+	f.loadFromFile("Graphics/font2.ttf");
+	tiltle.setFont(f);
+	tiltle.setFillColor(Color::Yellow);
+	tiltle.setOutlineThickness(5);
+	tiltle.setOutlineColor(Color::Black);
+	tiltle.setPosition(475, 300);
+	tiltle.setCharacterSize(100);
 	mainGame_Brick newGame = *this;
 	Texture tex;
 	tex.loadFromFile("Graphics/sprites/MenuBack.png");
@@ -492,6 +512,7 @@ int mainGame_Brick::PauseGame(RenderWindow* window)
 		}
 
 		window->draw(sp);
+		window->draw(tiltle);
 		for (int i = 0; i < 4; i++)
 		{
 			window->draw(sprite[i]);
@@ -500,4 +521,233 @@ int mainGame_Brick::PauseGame(RenderWindow* window)
 	}
 	
 	
+}
+
+//Menu endgame
+int mainGame_Brick::EndGame(RenderWindow* window)
+{
+	endGame = false;
+	Text tiltle;
+	tiltle.setString("ENDGAME");
+	Font f;
+	f.loadFromFile("Graphics/font2.ttf");
+	tiltle.setFont(f);
+	tiltle.setFillColor(Color::Yellow);
+	tiltle.setOutlineThickness(5);
+	tiltle.setOutlineColor(Color::Black);
+	tiltle.setPosition(425, 300);
+	tiltle.setCharacterSize(100);
+	mainGame_Brick newGame = *this;
+	Texture tex;
+	tex.loadFromFile("Graphics/sprites/MenuBack.png");
+	Texture t[4];
+	t[0].loadFromFile("Graphics/Button/Replay1.png");
+	t[1].loadFromFile("Graphics/Button/Replay2.png");
+	t[2].loadFromFile("Graphics/Button/MainMenu1.png");
+	t[3].loadFromFile("Graphics/Button/MainMenu2.png");
+	Sprite sprite[2];
+	for (int i = 0; i < 2; i++)
+	{
+		sprite[i].setTexture(t[i * 2]);
+	}
+	sprite[0].setPosition(450, 450);
+	sprite[1].setPosition(650, 450);
+	sprite[0].setTexture(t[1]);
+	int luachon = 0;
+	while (true)
+	{
+		window->clear();
+		endGame = false;
+		newGame.Xuat(window);
+		Sprite sp(tex);
+		sp.setPosition(300, 250);
+		sf::Event event;
+		while (window->pollEvent(event))
+		{
+			switch (event.type)
+			{
+			case sf::Event::KeyReleased:
+				switch (event.key.code)
+				{
+				case sf::Keyboard::Left:
+				{
+					if (luachon == 0)
+					{
+						sprite[luachon].setTexture(t[luachon * 2]);
+						luachon = 1;
+						sprite[luachon].setTexture(t[luachon * 2 + 1]);
+					}
+					else
+					{
+						sprite[luachon].setTexture(t[luachon * 2]);
+						luachon--;
+						sprite[luachon].setTexture(t[luachon * 2 + 1]);
+					}
+					break;
+				}
+				case sf::Keyboard::Right:
+				{
+					if (luachon == 1)
+					{
+						sprite[luachon].setTexture(t[luachon * 2]);
+						luachon = 0;
+						sprite[luachon].setTexture(t[luachon * 2 + 1]);
+					}
+					else
+					{
+						sprite[luachon].setTexture(t[luachon * 2]);
+						luachon++;
+						sprite[luachon].setTexture(t[luachon * 2 + 1]);
+					}
+					break;
+				}
+				case sf::Keyboard::Enter:
+				{
+					paused = false;
+					window->clear();
+					return luachon;
+				}
+				}
+
+				break;
+
+				break;
+
+			}
+		}
+
+		window->draw(sp);
+		window->draw(tiltle);
+		for (int i = 0; i < 2; i++)
+		{
+			window->draw(sprite[i]);
+		}
+		window->display();
+	}
+
+}
+
+string mainGame_Brick::Level(RenderWindow* window)
+{
+	Text tiltle;
+	tiltle.setString("CHOOSE LEVEL");
+	Font f;
+	f.loadFromFile("Graphics/font2.ttf");
+	tiltle.setFont(f);
+	tiltle.setFillColor(Color::Yellow);
+	tiltle.setOutlineThickness(5);
+	tiltle.setOutlineColor(Color::Blue);
+	tiltle.setPosition(325, 300);
+	tiltle.setCharacterSize(100);
+	//Doi tuong so
+	Text level;
+	level.setFont(f);
+	level.setFillColor(Color::Yellow);
+	level.setOutlineThickness(5);
+	level.setOutlineColor(Color::Blue);
+	level.setPosition(570, 435);
+	level.setCharacterSize(100);
+	mainGame_Brick newGame = *this;
+	Texture tex;
+	tex.loadFromFile("Graphics/sprites/MainMenuBackground.png");
+	Texture t[4];
+	t[0].loadFromFile("Graphics/Button/Down1.png");
+	t[1].loadFromFile("Graphics/Button/Down2.png");
+	t[2].loadFromFile("Graphics/Button/Up1.png");
+	t[3].loadFromFile("Graphics/Button/Up2.png");
+	Sprite sprite[2];
+	for (int i = 0; i < 2; i++)
+	{
+		sprite[i].setTexture(t[i * 2]);
+	}
+	sprite[0].setPosition(400, 450);
+	sprite[1].setPosition(700, 450);
+	int kt = 0;
+	int luachon = 1;
+	while (true)
+	{
+		kt = 0;
+		window->clear();
+		for (int i = 0; i < 2; i++)
+		{
+			sprite[i].setTexture(t[i * 2]);
+		}
+		Sprite sp(tex);
+		sf::Event event;
+		while (window->pollEvent(event))
+		{
+			kt = 0;
+			switch (event.type)
+			{
+			case sf::Event::KeyReleased:
+				switch (event.key.code)
+				{
+				case sf::Keyboard::Left:
+				{
+					if (luachon > 1)
+					{
+						sprite[0].setTexture(t[1]);
+						luachon--;
+						kt = 1;
+					}
+					break;
+				}
+				case sf::Keyboard::Right:
+				{
+					if (luachon < 5)
+					{
+						sprite[1].setTexture(t[3]);
+						luachon++;
+						kt = 1;
+					}
+					break;
+				}
+				case sf::Keyboard::Space:
+				{
+					window->clear();
+					return toString(luachon);
+				}
+				}
+
+				break;
+
+				break;
+
+			}
+		}
+		level.setString(toString(luachon));
+		window->draw(sp);
+		window->draw(tiltle);
+		window->draw(level);
+		for (int i = 0; i < 2; i++)
+		{
+			window->draw(sprite[i]);
+		}
+		window->display();
+		if (kt == 1)
+		{
+			Sleep(100);
+		}
+	}
+}
+
+//Chuyen so tu int sang string
+string mainGame_Brick::toString(int a)
+{
+	// chuyển đổi số thành chuỗi để in ra màn hình
+	string str = "";
+	if (a == 0)
+	{
+		str = "0";
+	}
+	while (a != 0)
+	{
+		str += char(a % 10 + 48);
+		a /= 10;
+	}
+	for (int i = 0; i < str.length() / 2; i++)
+	{
+		swap(str[i], str[str.length() - i - 1]);
+	}
+	return str;
 }

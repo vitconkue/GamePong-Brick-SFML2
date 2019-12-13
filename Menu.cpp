@@ -56,7 +56,7 @@ void Menu::CapNhat(RenderWindow* window)
 		this->luachon = 3;
 	}
 	//Bấm Enter để lựa chọn
-	if (Keyboard::isKeyPressed(Keyboard::Key::Space))
+	if (Keyboard::isKeyPressed(Keyboard::Key::Enter))
 	{
 		switch (this->luachon)
 		{

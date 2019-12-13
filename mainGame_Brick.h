@@ -9,6 +9,7 @@
 #include "Brick_Prize.h"
 #include "SupportFunction.h"
 #include <fstream>
+#include<Windows.h>
 
 // là một trạng thái
 class mainGame_Brick : public TrangThai
@@ -23,6 +24,9 @@ public:
 	void SaveGame(string filename); // lưu game
 	void LoadGame(string filename); // load game
 	int PauseGame(RenderWindow* window);//pause game
+	int EndGame(RenderWindow* window);//end game
+	string Level(RenderWindow* window);//Chon man choi
+	string toString(int a);
 private: 
 	vector<Heart_BrickGame*> hearts; // vector mạng
 	vector<Brick_BrickGame*> brick; // vector chứa các viên gạch

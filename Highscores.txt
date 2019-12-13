@@ -1,4 +1,4 @@
-15
+30
 TestPlayer1:120
 An:483
 TestPlayer2:278
@@ -14,3 +14,18 @@ test34:200
 Superman:1750
 dang khoa:200
 Dangkhoa:6250
+test1:550
+test12345:200
+testendgame1:200
+testendgame2:250
+dang khoa:100
+dang khoa:100
+dang khoa:100
+dang khoa:100
+dn:100
+dang khoa:100
+dang khoa:100
+dang khoa:100
+dang khoa:100
+dangg:100
+khoanek:100
