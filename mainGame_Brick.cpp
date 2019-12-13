@@ -67,7 +67,7 @@ void mainGame_Brick::CapNhat(RenderWindow* window)
 	{
 		endGame = true;
 	}
-	else if (brick.empty()) endGame = true;  // hết gạch=> thắng, kết thúc game
+	else if (checkCleanAllBrick()) endGame = true;  // hết gạch có thể phá=> thắng, kết thúc game
 	else {
 		// cập nhật các yếu tố liên quan bóng
 		ball->CapNhat(window, point, player, hearts);
@@ -729,6 +729,16 @@ string mainGame_Brick::Level(RenderWindow* window)
 			Sleep(100);
 		}
 	}
+}
+
+bool mainGame_Brick::checkCleanAllBrick()
+{
+	int len = brick.size(); 
+	for (int i = 0; i < len; i++)
+	{
+		if (brick[i]->getShieldNumber() != 4) return false; 
+	}
+	return true; 
 }
 
 //Chuyen so tu int sang string

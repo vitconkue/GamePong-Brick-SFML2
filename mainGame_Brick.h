@@ -26,6 +26,7 @@ public:
 	int PauseGame(RenderWindow* window);//pause game
 	int EndGame(RenderWindow* window);//end game
 	string Level(RenderWindow* window);//Chon man choi
+	bool checkCleanAllBrick(); 
 	string toString(int a);
 private: 
 	vector<Heart_BrickGame*> hearts; // vector mạng
