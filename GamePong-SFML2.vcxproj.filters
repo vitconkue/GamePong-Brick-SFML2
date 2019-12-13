@@ -72,6 +72,9 @@
     <ClCompile Include="mainGame_Bot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="mainGame_Custom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VatThe.h">
@@ -126,6 +129,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="mainGame_Bot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mainGame_Custom.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

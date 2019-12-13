@@ -41,6 +41,7 @@ void mainGame_Brick::KhoiTao(RenderWindow* window)
 		hearts.push_back(newHeart);
 	}
 	background.loadFromFile("Graphics/sprites/InGameBackground.png");
+	//Cấp phát brick
 }
 // cập nhật tất cả yếu tố liên quan trò chơi
 void mainGame_Brick::CapNhat(RenderWindow* window)
@@ -696,7 +697,7 @@ string mainGame_Brick::Level(RenderWindow* window)
 				}
 				case sf::Keyboard::Right:
 				{
-					if (luachon < 5)
+					if (luachon < 6)
 					{
 						sprite[1].setTexture(t[3]);
 						luachon++;
@@ -717,7 +718,14 @@ string mainGame_Brick::Level(RenderWindow* window)
 
 			}
 		}
-		level.setString(toString(luachon));
+		if (luachon == 6)
+		{
+			level.setString("C");
+		}
+		else
+		{
+			level.setString(toString(luachon));
+		}
 		window->draw(sp);
 		window->draw(tiltle);
 		window->draw(level);

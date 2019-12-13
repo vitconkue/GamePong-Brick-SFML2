@@ -2,6 +2,7 @@
 
 #include "HighScoreScreen.h"
 #include "mainGame_Bot.h"
+#include"mainGame_Custom.h"
 
 using namespace sf;
 class Menu : public TrangThai
@@ -17,6 +18,7 @@ private:
 	Text* pongGame;
 	Text* brickGame; 
 	Text* brickBotGame; 
+	Text* custom;
 	Text* highscore_menu; 
 	Text* thoat;
 	int luachon;
