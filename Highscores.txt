@@ -1,4 +1,4 @@
-30
+34
 TestPlayer1:120
 An:483
 TestPlayer2:278
@@ -29,3 +29,7 @@ dang khoa:100
 dang khoa:100
 dangg:100
 khoanek:100
+teste:100
+123:100
+123:200
+noname:150
