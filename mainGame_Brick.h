@@ -3,13 +3,13 @@
 #include "ThanhNguoiChoi_Brick.h"
 #include "DiemSo.h"
 #include "Ball_BrickGame.h"
-#include "Menu.h"
 #include"Brick_BrickGame.h"
 #include "Heart_BrickGame.h"
 #include "Brick_Prize.h"
 #include "SupportFunction.h"
 #include <fstream>
 #include<Windows.h>
+
 
 // là một trạng thái
 class mainGame_Brick : public TrangThai
@@ -28,7 +28,7 @@ public:
 	string Level(RenderWindow* window);//Chon man choi
 	bool checkCleanAllBrick(); 
 	string toString(int a);
-private: 
+protected: 
 	vector<Heart_BrickGame*> hearts; // vector mạng
 	vector<Brick_BrickGame*> brick; // vector chứa các viên gạch
 	vector<Brick_Prize*> prize;  //vector chứa các vật phẩm

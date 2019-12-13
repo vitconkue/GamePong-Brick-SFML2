@@ -1,6 +1,6 @@
 ﻿#include "Ball_BrickGame.h"
 #include <iostream>
-Ball_BrickGame::Ball_BrickGame(DiemSo* d, Thanh* p)
+Ball_BrickGame::Ball_BrickGame(DiemSo* d)
 {
 	// đặt vận tốc ban đầu
 	this->speed.x = 1.5;
@@ -9,7 +9,6 @@ Ball_BrickGame::Ball_BrickGame(DiemSo* d, Thanh* p)
 	lives = 4; 
 	Load("ball.png"); 
 	diem = d; 
-	player = p; 
 	// load âm thanh
 	buffer = new SoundBuffer(); 
 	buffer->loadFromFile("Sounds/bounce.wav"); 
@@ -47,7 +46,7 @@ void Ball_BrickGame::CapNhat(sf::RenderWindow* window, DiemSo*& point, ThanhNguo
 	if (getPosition().y > player->getPosition().y - player->getGlobalBounds().height / 2 + 2)
 	{
 		lives--; // giảm mạng còn lại 
-		reset(window);   
+		reset(window, player);   
 	}
 	// chạm tường trái phải
 	if (getPosition().x < 0 || getPosition().x + getGlobalBounds().width >= window->getSize().x)
@@ -59,19 +58,18 @@ void Ball_BrickGame::CapNhat(sf::RenderWindow* window, DiemSo*& point, ThanhNguo
 	VatThe::CapNhat(); // di chuyển theo vector vận tốc hiện thời
 }
 // reset khi không hứng dược bóng
-void Ball_BrickGame::reset(sf::RenderWindow* window)
+void Ball_BrickGame::reset(sf::RenderWindow* window, ThanhNguoiChoi_Brick*& player)
 {
 	this->speed.x = ((rand() % 2) == 0) ? 1.2 : -1.2; //Random hướng của bóng theo x với vận tốc 1.2f
 	this->speed.y = -1.2; 
-	player->setPosition(window->getSize().x / 2, window->getSize().y - 20); 
 	this->setPosition(window->getSize().x / 2, window->getSize().y - 60); 
 	player->setScale(1.0, 1.0); 
 }
 
-void Ball_BrickGame::setPlayer(Thanh* _player)
-{
-	player = _player; 
-}
+//void Ball_BrickGame::setPlayer(Thanh* _player)
+//{
+//	player = _player; 
+//}
 
 Ball_BrickGame::~Ball_BrickGame()
 {

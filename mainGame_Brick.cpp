@@ -1,5 +1,5 @@
 ﻿#include "mainGame_Brick.h"
-
+#include "Menu.h"
 // Khởi tạo ban đầu
 void mainGame_Brick::KhoiTao(RenderWindow* window)
 {
@@ -7,9 +7,11 @@ void mainGame_Brick::KhoiTao(RenderWindow* window)
 	this->font = new sf::Font();
 	this->font->loadFromFile("Graphics/font2.ttf");
 	player = new ThanhNguoiChoi_Brick;
+	player->setPosition(window->getSize().x / 2, window->getSize().y - 20);
+	player->setScale(1.0, 1.0);
 	point = new DiemSo(*font, 64U);
-	ball = new Ball_BrickGame(point, player); 
-	ball->reset(window); 
+	ball = new Ball_BrickGame(point); 
+	ball->reset(window, player); 
 	this->pausedText = new Text("Paused. Press P to continue.\nPress Esc to exit.\nPress S to Save, Press L to Load.", *font, 64U);
 	this->pausedText->setOrigin(this->pausedText->getGlobalBounds().width / 2, this->pausedText->getGlobalBounds().height / 2);
 	this->pausedText->setPosition(window->getSize().x / 2, window->getSize().y / 2);

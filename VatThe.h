@@ -12,6 +12,10 @@ private:
 public:
 	Vector2f speed; //vận tốc của vật sử dụng vector2f trong Sprite
 	//Hàm đọc thông tin từ file.
+	Vector2f getSpeed()
+	{
+		return speed;
+	}
 	void Load(string filename)
 	{
 		this->texture->loadFromFile("Graphics/sprites/" + filename);
