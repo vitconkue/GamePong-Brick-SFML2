@@ -26,13 +26,13 @@ void mainGame_Custom::KhoiTao(RenderWindow* window)
 	this->font->loadFromFile("Graphics/font3.ttf");
 	tiltle1.setFont(*font);
 	tiltle1.setFillColor(Color::Yellow);
-	tiltle1.setString("Left/Right: Move\nUp/Down: Change brick");
-	tiltle1.setPosition(100, 600);
+	tiltle1.setString("Left/Right: Move\nUp/Down: Change brick\nEnter: Set brick");
+	tiltle1.setPosition(50, 600);
 	tiltle2.setCharacterSize(75);
 	tiltle2.setFont(*font);
 	tiltle2.setFillColor(Color::Yellow);
-	tiltle2.setString("Enter: Set brick\nEcs: Save and Quit");
-	tiltle2.setPosition(800, 600);
+	tiltle2.setString("Backspace: Delete last brick\nEcs: Save and Quit");
+	tiltle2.setPosition(650, 600);
 }
 
 void mainGame_Custom::CapNhat(RenderWindow* window)
