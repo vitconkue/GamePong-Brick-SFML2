@@ -27,7 +27,10 @@ void Ball_BrickGame::CapNhat(sf::RenderWindow* window, DiemSo*& point, ThanhNguo
 		{
 			// set lại hướng tuỳ theo vị trí chạm thanh, tăng vận tốc 10%
 			double curSpeed = sqrt(speed.x * speed.x + speed.y * speed.y); 
-			curSpeed *= 1.1;
+			if (curSpeed <= 13)
+			{
+				curSpeed *= 1.1;
+			}
 			Vector2f ballPos = this->getPosition();
 			Vector2f PaddlePos = player->getPosition();
 			double P = (PaddlePos.x - ballPos.x) / (player->getGlobalBounds().width / 4);
@@ -49,7 +52,7 @@ void Ball_BrickGame::CapNhat(sf::RenderWindow* window, DiemSo*& point, ThanhNguo
 		reset(window, player);   
 	}
 	// chạm tường trái phải
-	if (getPosition().x < 0 || getPosition().x + getGlobalBounds().width >= window->getSize().x)
+	if (getPosition().x - getGlobalBounds().width/2 < 0 || getPosition().x + getGlobalBounds().width/2 >= window->getSize().x)
 	{
 		speed.x *= -1; 
 		sound->play();
