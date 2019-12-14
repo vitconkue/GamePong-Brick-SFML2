@@ -11,6 +11,7 @@ private:
 	DiemSo* diem; // điểm
 	int lives; // mạng 
 	sf::SoundBuffer* buffer; // biến buffer âm thanh
+	sf::SoundBuffer* buffer2;
 	sf::Sound* sound; // âm thanh
 public: 
 	Ball_BrickGame(DiemSo* d); // constructor 

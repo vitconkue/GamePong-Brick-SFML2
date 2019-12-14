@@ -43,5 +43,11 @@ protected:
 	bool paused, enterKey; 
 	bool endGame; 
 	Texture background;
+	//Âm thanh
+	SoundBuffer* moveBuffer;
+	SoundBuffer* selectBuffer;
+	SoundBuffer* gameBuffer;
+	Sound* mainsound;
+	Sound* gameSound;
 };
 

@@ -66,7 +66,7 @@ public:
 			this->trangthai->Xuat(this->window);
 		}
 	}
-
+	//getBuffer
 	~TrangThaiGame()
 	{
 		if (this->trangthai != NULL)

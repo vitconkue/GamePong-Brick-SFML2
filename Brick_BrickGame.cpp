@@ -3,7 +3,10 @@
 
 Brick_BrickGame::Brick_BrickGame()
 {
-	
+	buffer = new SoundBuffer();
+	sound = new Sound();
+	buffer->loadFromFile("Sounds/Brick.wav");
+	sound->setBuffer(*buffer);
 }
 
 void Brick_BrickGame::setShieldNumber(int number)
@@ -24,6 +27,7 @@ void Brick_BrickGame::CapNhat(Ball_BrickGame*& m_ball, DiemSo*& point)
 	Vector2f ballSize(m_ball->getGlobalBounds().width, m_ball->getGlobalBounds().height);
 	if (KiemTraVaCham(m_ball))
 	{
+		sound->play();
 		if (m_ball->speed.x > 0 && m_ball->speed.y < 0)
 		{
 			if (ballPos.x > brickPos.x - brickSize.x / 2 + ballSize.x / 2)
@@ -268,4 +272,10 @@ char Brick_BrickGame::getBrickColor()
 void Brick_BrickGame::setBrickColor(char a)
 {
 	BrickColor = a;
+}
+
+Brick_BrickGame::~Brick_BrickGame()
+{
+	delete this->buffer;
+	delete this->sound;
 }
