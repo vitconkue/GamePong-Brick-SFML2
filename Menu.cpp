@@ -34,6 +34,10 @@ void Menu::KhoiTao(RenderWindow* window)
 	this->custom = new Text("Custom", *font, 90U);
 	this->custom->setOrigin(custom->getGlobalBounds().width / 2, custom->getGlobalBounds().height / 2);
 	this->custom->setPosition(window->getSize().x / 2, window->getSize().y / 3 + 300);
+	//Nút vào chọn đường đi
+	this->findway = new Text("Find way", *font, 90U);
+	this->findway->setOrigin(findway->getGlobalBounds().width / 2, findway->getGlobalBounds().height / 2);
+	this->findway->setPosition(window->getSize().x / 2, window->getSize().y / 3 + 360);
 	//Nút thoát
 	this->thoat = new Text("Quit Game", *this->font, 128U);
 	this->thoat->setOrigin(this->thoat->getGlobalBounds().width / 2, this->thoat->getGlobalBounds().height / 2);
