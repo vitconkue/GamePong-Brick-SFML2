@@ -147,6 +147,7 @@
     <ClCompile Include="mainGame_Bot.cpp" />
     <ClCompile Include="mainGame_Brick.cpp" />
     <ClCompile Include="mainGame_Custom.cpp" />
+    <ClCompile Include="mainGame_Findway.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="SupportFunction.cpp" />
     <ClCompile Include="Thanh.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="mainGame_Bot.h" />
     <ClInclude Include="mainGame_Brick.h" />
     <ClInclude Include="mainGame_Custom.h" />
+    <ClInclude Include="mainGame_Findway.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="SupportFunction.h" />
     <ClInclude Include="Thanh.h" />

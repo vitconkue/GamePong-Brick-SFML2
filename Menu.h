@@ -3,6 +3,7 @@
 #include "HighScoreScreen.h"
 #include "mainGame_Bot.h"
 #include"mainGame_Custom.h"
+#include"mainGame_Findway.h"
 
 using namespace sf;
 class Menu : public TrangThai
@@ -19,6 +20,7 @@ private:
 	Text* brickGame; 
 	Text* brickBotGame; 
 	Text* custom;
+	Text* findway;
 	Text* highscore_menu; 
 	Text* thoat;
 	int luachon;

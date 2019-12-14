@@ -14,8 +14,10 @@ public:
 	void setShieldNumber(int number);// setter shield
 	Brick_BrickGame(); // constructor
 	void CapNhat(Ball_BrickGame*& m_ball, DiemSo*& point); // cập nhật các yếu tố liên quan
+	void CapNhat_Findway(Ball_BrickGame*& m_ball, DiemSo*& point);// cập nhật các yếu tố liên quan
 	void TaoTexture(); // tạo texture bằng cách load từ ảnh
 	char getBrickColor(); // lấy màu gạch
 	void setBrickColor(char a); // set màu gạch
+
 };
 

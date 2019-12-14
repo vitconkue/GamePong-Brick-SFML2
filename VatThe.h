@@ -16,6 +16,10 @@ public:
 	{
 		return speed;
 	}
+	void setSpeed(Vector2f a)
+	{
+		speed = a;
+	}
 	void Load(string filename)
 	{
 		this->texture->loadFromFile("Graphics/sprites/" + filename);

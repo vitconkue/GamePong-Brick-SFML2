@@ -34,10 +34,14 @@ void Menu::KhoiTao(RenderWindow* window)
 	this->custom = new Text("Custom Mode", *font, 90U);
 	this->custom->setOrigin(custom->getGlobalBounds().width / 2, custom->getGlobalBounds().height / 2);
 	this->custom->setPosition(window->getSize().x / 2, window->getSize().y / 3 + 300);
+	//Nút vào chọn đường đi
+	this->findway= new Text("Find way", *font, 90U);
+	this->findway->setOrigin(findway->getGlobalBounds().width / 2, findway->getGlobalBounds().height / 2);
+	this->findway->setPosition(window->getSize().x / 2, window->getSize().y / 3 + 360);
 	//Nút thoát
 	this->thoat = new Text("Quit Game", *this->font, 128U);
 	this->thoat->setOrigin(this->thoat->getGlobalBounds().width / 2, this->thoat->getGlobalBounds().height / 2);
-	this->thoat->setPosition(window->getSize().x / 2, window->getSize().y / 3 + this->pongGame->getGlobalBounds().height + 320);
+	this->thoat->setPosition(window->getSize().x / 2, window->getSize().y / 3 + this->pongGame->getGlobalBounds().height + 360);
 	//background
 	background.loadFromFile("Graphics/sprites/InGameBackGround.png");
 }
@@ -55,13 +59,13 @@ void Menu::CapNhat(RenderWindow* window)
 		this->luachon += 1;
 	}
 	//Nếu lựa chọn >1 hoặc <1 trả về 0
-	if (this->luachon > 5)
+	if (this->luachon > 6)
 	{
 		this->luachon = 0;
 	}
 	if (this->luachon < 0)
 	{
-		this->luachon = 5;
+		this->luachon = 6;
 	}
 	//Bấm Enter để lựa chọn
 	if (Keyboard::isKeyPressed(Keyboard::Key::Enter))
@@ -82,7 +86,11 @@ void Menu::CapNhat(RenderWindow* window)
 			break;
 		case 4:
 			coreState.SetTrangThai(new mainGame_Custom());
+			break;
 		case 5:
+			coreState.SetTrangThai(new mainGame_Findway());
+			break;
+		case 6:
 			quitGame = true;
 			break;
 		}
@@ -104,7 +112,8 @@ void Menu::Xuat(sf::RenderWindow* window)
 		this->thoat->setFillColor(Color::White); 
 		this->highscore_menu->setFillColor(Color::White);
 		this->custom->setFillColor(Color::White);
-		this->brickBotGame->setFillColor(Color::White); 
+		this->brickBotGame->setFillColor(Color::White);
+		this->findway->setFillColor(Color::White);
 		break;
 	case 1: 
 		this->brickGame->setFillColor(Color::Blue); 
@@ -113,6 +122,7 @@ void Menu::Xuat(sf::RenderWindow* window)
 		this->highscore_menu->setFillColor(Color::White);
 		this->custom->setFillColor(Color::White);
 		this->brickBotGame->setFillColor(Color::White);
+		this->findway->setFillColor(Color::White);
 		break; 
 	case 2: 
 		this->highscore_menu->setFillColor(Color::White); 
@@ -121,6 +131,7 @@ void Menu::Xuat(sf::RenderWindow* window)
 		this->thoat->setFillColor(Color::White);
 		this->custom->setFillColor(Color::White);
 		this->brickBotGame->setFillColor(Color::Blue);
+		this->findway->setFillColor(Color::White);
 		break; 
 		
 	case 3:
@@ -130,6 +141,7 @@ void Menu::Xuat(sf::RenderWindow* window)
 		this->highscore_menu->setFillColor(Color::Blue);
 		this->brickBotGame->setFillColor(Color::White);
 		this->custom->setFillColor(Color::White);
+		this->findway->setFillColor(Color::White);
 		break; 
 	case 4: 
 		this->pongGame->setFillColor(Color::White);
@@ -138,16 +150,30 @@ void Menu::Xuat(sf::RenderWindow* window)
 		this->highscore_menu->setFillColor(Color::White);
 		this->brickBotGame->setFillColor(Color::White);
 		this->custom->setFillColor(Color::Blue);
+		this->findway->setFillColor(Color::White);
 		break;
 	case 5:
+		this->pongGame->setFillColor(Color::White);
+		this->brickGame->setFillColor(Color::White);
+		this->thoat->setFillColor(Color::White);
+		this->highscore_menu->setFillColor(Color::White);
+		this->brickBotGame->setFillColor(Color::White);
+		this->custom->setFillColor(Color::White);
+		this->findway->setFillColor(Color::Blue);
+		break;
+	case 6:
+	{
 		this->pongGame->setFillColor(Color::White);
 		this->brickGame->setFillColor(Color::White);
 		this->thoat->setFillColor(Color::Red);
 		this->highscore_menu->setFillColor(Color::White);
 		this->brickBotGame->setFillColor(Color::White);
 		this->custom->setFillColor(Color::White);
+		this->findway->setFillColor(Color::White);
 		break;
 	}
+	}
+
 	//Xuất background
 	Sprite sp(background);
 	window->draw(sp);
@@ -156,6 +182,7 @@ void Menu::Xuat(sf::RenderWindow* window)
 	window->draw(*this->brickGame);
 	window->draw(*this->brickBotGame); 
 	window->draw(*this->highscore_menu);
+	window->draw(*this->findway);
 	window->draw(*this->custom);
 	window->draw(*this->thoat);
 }
@@ -166,4 +193,5 @@ void Menu::Destroy(RenderWindow* window)
 	delete this->pongGame;
 	delete this->brickGame; 
 	delete this->thoat;
+	delete this->findway;
 }

@@ -41,7 +41,6 @@ void mainGame_Brick::KhoiTao(RenderWindow* window)
 		hearts.push_back(newHeart);
 	}
 	background.loadFromFile("Graphics/sprites/InGameBackground.png");
-	//Cấp phát brick
 }
 // cập nhật tất cả yếu tố liên quan trò chơi
 void mainGame_Brick::CapNhat(RenderWindow* window)

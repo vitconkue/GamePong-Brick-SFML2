@@ -168,6 +168,8 @@ void mainGame_Bot::Xuat(RenderWindow* window)
 	}
 }
 
+
+
 void mainGame_Bot::Destroy(RenderWindow* window)
 {
 	mainGame_Brick::Destroy(window);
