@@ -7,6 +7,7 @@ using namespace std;
 TrangThaiGame coreState;
 bool quitGame = false;
 
+
 int main()
 {
 	RenderWindow window(VideoMode(1200, 900), "PingPong"); // tạo cửa sổ
@@ -14,6 +15,7 @@ int main()
 	coreState.SetTrangThai(new Menu());
 	while (window.isOpen())
 	{
+
 		Event event;
 		while (window.pollEvent(event))
 		{

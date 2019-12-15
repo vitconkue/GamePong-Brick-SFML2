@@ -1,4 +1,4 @@
-37
+41
 TestPlayer1:120
 An:483
 TestPlayer2:278
@@ -34,5 +34,9 @@ teste:100
 123:200
 noname:150
 :0
-ko:200
-PlayerName:4274
+k:1650
+yo:100
+Tester:100
+dang khoa nek:100
+r:100
+1234:100

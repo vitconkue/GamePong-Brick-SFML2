@@ -27,6 +27,15 @@ void mainGame_Brick::KhoiTao(RenderWindow* window)
 	this->enterKey = false;
 	this->endGame = false;
 	Effect = 1;
+	//Load âm thanh
+	moveBuffer = new SoundBuffer();
+	selectBuffer = new SoundBuffer();
+	gameBuffer = new SoundBuffer();
+	gameSound = new Sound();
+	mainsound = new Sound();
+	moveBuffer->loadFromFile("Sounds/Move.wav");
+	selectBuffer->loadFromFile("Sounds/Select.wav");
+	gameBuffer->loadFromFile("Sounds/Ingame.ogg");
 	//Chon level khi khoi tao
 	string level = Level(window);
 	string filename = "BrickLevel/level";
@@ -41,25 +50,32 @@ void mainGame_Brick::KhoiTao(RenderWindow* window)
 		hearts.push_back(newHeart);
 	}
 	background.loadFromFile("Graphics/sprites/InGameBackground.png");
+	//Nhạc nền
+	gameSound->setBuffer(*gameBuffer);
+	gameSound->play();
 }
 // cập nhật tất cả yếu tố liên quan trò chơi
 void mainGame_Brick::CapNhat(RenderWindow* window)
 {
 	if (paused)
 	{
+		gameSound->pause();
 		int choose = PauseGame(window);
 		if (choose == 1)
 		{
+			gameSound->stop();
 			coreState.SetTrangThai(new Menu());
 			return;
 		}
 		if (choose==2)
 		{
+			gameSound->play();
 			SaveGame("Save/1.txt");
 			paused = false;
 		}
 		if (choose==3)
 		{
+			gameSound->play();
 			//KhoiTao(window);
 			LoadGame("Save/1.txt");
 			paused = false;
@@ -178,11 +194,13 @@ void mainGame_Brick::Xuat(RenderWindow* window)
 			if(choose == 0)
 			{
 				InputName(window);
+				gameSound->stop();
 				coreState.SetTrangThai(new mainGame_Brick());
 			}
 			else if (choose == 1)
 			{
 				InputName(window);
+				gameSound->stop();
 				coreState.SetTrangThai(new Menu());
 			}
 		}
@@ -192,12 +210,14 @@ void mainGame_Brick::Xuat(RenderWindow* window)
 			if (choose == 0)
 			{
 				InputName(window);
+				gameSound->stop();
 				mainGame_Brick* maingame = new mainGame_Brick();
 				coreState.SetTrangThai(maingame);
 			}
 			else if (choose == 1)
 			{
 				InputName(window);
+				gameSound->stop();
 				coreState.SetTrangThai(new Menu());
 			}
 		}
@@ -210,6 +230,11 @@ void mainGame_Brick::Destroy(RenderWindow* window)
 	delete player; 
 	delete ball; 
 	delete font; 
+	delete moveBuffer;
+	delete selectBuffer;
+	delete gameBuffer;
+	delete gameSound;
+	delete mainsound;
 }
 // Hàm nhập tên để lưu file khi đã kết thúc game
 void mainGame_Brick::InputName(RenderWindow* window)
@@ -243,6 +268,8 @@ void mainGame_Brick::InputName(RenderWindow* window)
 					window->draw(playerNameText);
 					window->display();
 					std::cout << playerName << endl;
+					mainsound->setBuffer(*moveBuffer);
+					mainsound->play();
 				}
 				else if (event.key.code == 13)
 				{
@@ -262,6 +289,8 @@ void mainGame_Brick::InputName(RenderWindow* window)
 					fout.close();
 					window->clear();
 					kt = 1;
+					mainsound->setBuffer(*selectBuffer);
+					mainsound->play();
 					break;
 				}
 				else
@@ -273,6 +302,8 @@ void mainGame_Brick::InputName(RenderWindow* window)
 					window->draw(playerNameText);
 					window->display();
 					std::cout << playerName << endl;
+					mainsound->setBuffer(*moveBuffer);
+					mainsound->play();
 				}
 			}
 		}
@@ -468,6 +499,8 @@ int mainGame_Brick::PauseGame(RenderWindow* window)
 				{
 				case sf::Keyboard::Left:
 				{
+					mainsound->setBuffer(*moveBuffer);
+					mainsound->play();
 					if (luachon == 0)
 					{
 						sprite[luachon].setTexture(t[luachon * 2]);
@@ -484,6 +517,8 @@ int mainGame_Brick::PauseGame(RenderWindow* window)
 				}
 				case sf::Keyboard::Right:
 				{
+					mainsound->setBuffer(*moveBuffer);
+					mainsound->play();
 					if (luachon == 3)
 					{
 						sprite[luachon].setTexture(t[luachon * 2]);
@@ -500,6 +535,8 @@ int mainGame_Brick::PauseGame(RenderWindow* window)
 				}
 				case sf::Keyboard::Enter:
 				{
+					mainsound->setBuffer(*selectBuffer);
+					mainsound->play();
 					paused = false;
 					window->clear();
 					return luachon;
@@ -573,6 +610,8 @@ int mainGame_Brick::EndGame(RenderWindow* window)
 				{
 				case sf::Keyboard::Left:
 				{
+					mainsound->setBuffer(*moveBuffer);
+					mainsound->play();
 					if (luachon == 0)
 					{
 						sprite[luachon].setTexture(t[luachon * 2]);
@@ -589,6 +628,8 @@ int mainGame_Brick::EndGame(RenderWindow* window)
 				}
 				case sf::Keyboard::Right:
 				{
+					mainsound->setBuffer(*moveBuffer);
+					mainsound->play();
 					if (luachon == 1)
 					{
 						sprite[luachon].setTexture(t[luachon * 2]);
@@ -605,6 +646,8 @@ int mainGame_Brick::EndGame(RenderWindow* window)
 				}
 				case sf::Keyboard::Enter:
 				{
+					mainsound->setBuffer(*selectBuffer);
+					mainsound->play();
 					paused = false;
 					window->clear();
 					return luachon;
@@ -692,6 +735,8 @@ string mainGame_Brick::Level(RenderWindow* window)
 						luachon--;
 						kt = 1;
 					}
+					mainsound->setBuffer(*moveBuffer);
+					mainsound->play();
 					break;
 				}
 				case sf::Keyboard::Right:
@@ -702,10 +747,14 @@ string mainGame_Brick::Level(RenderWindow* window)
 						luachon++;
 						kt = 1;
 					}
+					mainsound->setBuffer(*moveBuffer);
+					mainsound->play();
 					break;
 				}
 				case sf::Keyboard::Space:
 				{
+					mainsound->setBuffer(*selectBuffer);
+					mainsound->play();
 					window->clear();
 					return toString(luachon);
 				}

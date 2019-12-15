@@ -36,6 +36,10 @@ Brick_Prize::Brick_Prize()
 	// ban đầu tạo ra ở vị trí của viên gạch bị phá nên chưa chạm người chơi/sàn
 	touched_player = false; 
 	touched_floor = false;
+	buff = new SoundBuffer();
+	sound = new Sound();
+	buff->loadFromFile("Sounds/Prize.wav");
+	sound->setBuffer(*buff);
 }
 // constructor truyền loại vật phẩm mong muốn. 
 Brick_Prize::Brick_Prize(int _type)
@@ -59,6 +63,7 @@ void Brick_Prize::CapNhat(ThanhNguoiChoi_Brick*& player, DiemSo*& point, Ball_Br
 	VatThe::CapNhat();
 	if (KiemTraVaCham(player))
 	{
+		sound->play();
 		touched_player = true; // chuyển đổi thành đã va chạm
 		switch (type)
 		{
@@ -155,6 +160,12 @@ void Brick_Prize::TaoTexture() // load hình ảnh vào, tuỳ vào loại
 		Load("Heart.png"); 
 		break; 
 	}
+}
+
+Brick_Prize::~Brick_Prize()
+{
+	delete this->buff;
+	delete this->sound;
 }
 
 

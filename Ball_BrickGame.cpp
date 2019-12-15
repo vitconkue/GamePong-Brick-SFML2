@@ -11,8 +11,10 @@ Ball_BrickGame::Ball_BrickGame(DiemSo* d)
 	diem = d; 
 	// load âm thanh
 	buffer = new SoundBuffer(); 
-	buffer->loadFromFile("Sounds/bounce.wav"); 
-	this->sound = new Sound(*this->buffer); 
+	buffer2 = new SoundBuffer();
+	buffer->loadFromFile("Sounds/Paddle.wav"); 
+	buffer2->loadFromFile("Sounds/Miss.wav");
+	this->sound = new Sound;
 	this->setOrigin(Vector2f(getTexture()->getSize().x * 0.5, getTexture()->getSize().y * 0.5)); // đặt tâm text ở giữa
 }
 
@@ -33,6 +35,7 @@ void Ball_BrickGame::CapNhat(sf::RenderWindow* window, DiemSo*& point, ThanhNguo
 			double P = (PaddlePos.x - ballPos.x) / (player->getGlobalBounds().width / 4);
 			speed.y = - sqrt((curSpeed * curSpeed) / (P * P + 1));
 			speed.x = speed.y * P;
+			sound->setBuffer(*buffer);
 			sound->play();
 		}
     }
@@ -40,11 +43,12 @@ void Ball_BrickGame::CapNhat(sf::RenderWindow* window, DiemSo*& point, ThanhNguo
 	if (getPosition().y < 0 )
 	{
 		speed.y *= -1; 
-		sound->play();
 	}
 	// chạm tường dưới
 	if (getPosition().y > player->getPosition().y - player->getGlobalBounds().height / 2 + 2)
 	{
+		sound->setBuffer(*buffer2);
+		sound->play();
 		lives--; // giảm mạng còn lại 
 		reset(window, player);   
 	}
@@ -52,7 +56,6 @@ void Ball_BrickGame::CapNhat(sf::RenderWindow* window, DiemSo*& point, ThanhNguo
 	if (getPosition().x - getGlobalBounds().width/2 < 0 || getPosition().x + getGlobalBounds().width/2 >= window->getSize().x)
 	{
 		speed.x *= -1; 
-		sound->play();
 	}
 
 	VatThe::CapNhat(); // di chuyển theo vector vận tốc hiện thời
@@ -75,4 +78,5 @@ Ball_BrickGame::~Ball_BrickGame()
 {
 	delete sound; 
 	delete buffer;
+	delete buffer2;
 }

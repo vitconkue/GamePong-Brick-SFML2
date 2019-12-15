@@ -26,5 +26,11 @@ private:
 	int luachon;
     bool upKey, downKey;
 	Texture background;
+	//Âm thanh
+	SoundBuffer* moveBuffer;
+	SoundBuffer* selectBuffer;
+	SoundBuffer* mainBuffer;
+	Sound* mainsound;
+	Sound* sound;
 };
 

@@ -16,6 +16,8 @@ protected:
 	// type 5: tăng số mạng hiện có
 	bool touched_player; // biến cho biết người chơi lấy được vật phẩm rơi xuống hay chưa
 	bool touched_floor; // biến cho biết vật phẩm đã vượt qua người chơi hay chưa
+	SoundBuffer* buff;
+	Sound* sound;
 public :
 	int getType() { return type; } // getter lấy loại vật phẩm
 	void setType(int a) { type = 1; }
@@ -26,5 +28,6 @@ public :
 	void CapNhat(ThanhNguoiChoi_Brick*&player, DiemSo*& point, Ball_BrickGame*& ball);  // cập nhật các yếu tố liên quan 
 	void CapNhat(Thanh_Bot_Brick*& botPlayer, DiemSo*& point, Ball_BrickGame*& ball); 
 	void TaoTexture(); // tạo texture, load hình ảnh vào
+	~Brick_Prize();
 };
 

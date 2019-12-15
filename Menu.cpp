@@ -44,6 +44,17 @@ void Menu::KhoiTao(RenderWindow* window)
 	this->thoat->setPosition(window->getSize().x / 2, window->getSize().y / 3 + 500);
 	//background
 	background.loadFromFile("Graphics/sprites/InGameBackGround.png");
+	//Soundbuffer
+	this->moveBuffer = new SoundBuffer();
+	this->selectBuffer = new SoundBuffer();
+	this->mainBuffer = new SoundBuffer();
+	sound = new Sound();
+	mainsound = new Sound();
+	moveBuffer->loadFromFile("Sounds/Move.wav");
+	selectBuffer->loadFromFile("Sounds/Select.wav");
+	mainBuffer->loadFromFile("Sounds/MainMenu.ogg");
+	sound->setBuffer(*mainBuffer);
+	sound->play();
 }
 //Hàm cập nhật Menu
 void Menu::CapNhat(RenderWindow* window)
@@ -52,11 +63,15 @@ void Menu::CapNhat(RenderWindow* window)
 	if (Keyboard::isKeyPressed(Keyboard::Key::Up) && !this->upKey)
 	{
 		this->luachon -= 1;
+		mainsound->setBuffer(*moveBuffer);
+		mainsound->play();
 	}
 	//Khi sử dụng mũi tên lên, giá trị lựa chọn sẽ +1
 	if (Keyboard::isKeyPressed(Keyboard::Key::Down) && !this->downKey)
 	{
 		this->luachon += 1;
+		mainsound->setBuffer(*moveBuffer);
+		mainsound->play();
 	}
 	//Nếu lựa chọn >1 hoặc <1 trả về 0
 	if (this->luachon > 6)
@@ -70,6 +85,9 @@ void Menu::CapNhat(RenderWindow* window)
 	//Bấm Enter để lựa chọn
 	if (Keyboard::isKeyPressed(Keyboard::Key::Enter))
 	{
+		mainsound->setBuffer(*selectBuffer);
+		mainsound->play();
+		sound->stop();
 		switch (this->luachon)
 		{
 		case 0:
@@ -194,4 +212,9 @@ void Menu::Destroy(RenderWindow* window)
 	delete this->brickGame; 
 	delete this->thoat;
 	delete this->findway;
+	delete this->mainBuffer;
+	delete this->moveBuffer;
+	delete this->selectBuffer;
+	delete this->sound;
+	delete this->mainsound;
 }

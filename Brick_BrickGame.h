@@ -9,6 +9,8 @@ class Brick_BrickGame: public VatThe
 protected:
 	int Shield; // biến biểu diễn trạng thái của viên gạch, = 0 thì vỡ
 	char BrickColor; // màu gạch
+	SoundBuffer* buffer;
+	Sound* sound;
 public:
 	int getShieldNumber(); // getter shield
 	void setShieldNumber(int number);// setter shield
@@ -18,6 +20,6 @@ public:
 	void TaoTexture(); // tạo texture bằng cách load từ ảnh
 	char getBrickColor(); // lấy màu gạch
 	void setBrickColor(char a); // set màu gạch
-
+	~Brick_BrickGame();
 };
 
