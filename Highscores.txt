@@ -1,4 +1,4 @@
-35
+37
 TestPlayer1:120
 An:483
 TestPlayer2:278
@@ -34,3 +34,5 @@ teste:100
 123:200
 noname:150
 :0
+ko:200
+PlayerName:4274

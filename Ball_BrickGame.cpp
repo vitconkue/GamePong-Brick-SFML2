@@ -27,10 +27,7 @@ void Ball_BrickGame::CapNhat(sf::RenderWindow* window, DiemSo*& point, ThanhNguo
 		{
 			// set lại hướng tuỳ theo vị trí chạm thanh, tăng vận tốc 10%
 			double curSpeed = sqrt(speed.x * speed.x + speed.y * speed.y); 
-			if (curSpeed <= 13)
-			{
-				curSpeed *= 1.1;
-			}
+			curSpeed *= 1.1;
 			Vector2f ballPos = this->getPosition();
 			Vector2f PaddlePos = player->getPosition();
 			double P = (PaddlePos.x - ballPos.x) / (player->getGlobalBounds().width / 4);
